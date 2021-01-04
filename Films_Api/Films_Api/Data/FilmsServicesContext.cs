@@ -26,6 +26,5 @@ namespace Films_Api.Data
 
 
         //public GridFSBucket ImagesBucket => new GridFSBucket(Database);
-
     }
 }

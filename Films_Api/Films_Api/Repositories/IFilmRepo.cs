@@ -6,8 +6,14 @@ namespace Films_Api.Repositories
 {
     public interface IFilmRepo
     {
-        Task<Film> CreateAsync(Film film);
+        
         Task<IEnumerable<Film>> GetAll();
-        Task<IEnumerable<Review>> GetReviewsForRestaurant(string id);
+        Task<Film> GetFilmById(string id);
+        Task<IEnumerable<Film>> GetFilmByName(string name);
+        Task<IEnumerable<Review>> GetReviewsForFilm(string id);
+        Task<Film> CreateAsync(Film film);
+        Task<string> RemoveAsync(string id);
+        Task<Film> UpsertAsync(Film film);
+        Task<bool> CollectionExistsAsync(string filmName);
     }
 }

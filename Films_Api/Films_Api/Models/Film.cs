@@ -40,7 +40,7 @@ namespace Films_Api.Models
         public class Genre
         {
             [BsonElement("Id")]
-            public string Id { get; set; }
+            public Guid Id { get; set; }
             [BsonElement("GenreName")]
             public string GenreName { get; set; }
         }

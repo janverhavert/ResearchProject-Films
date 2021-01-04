@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Films_Api.Data;
+using Films_Api.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,17 +35,23 @@ namespace Films_Api
 
             //MongoDB-registraties
             services.AddSingleton<IMongoSettings>(sp => sp.GetRequiredService<IOptions<MongoSettings>>().Value);
+
+            //context en repo's 
+            services.AddSingleton<FilmsServicesContext>();
+            services.AddScoped(typeof(IFilmRepo), typeof(FilmRepo));
+
+            services.AddScoped<Seeder>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Seeder seeder)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -53,6 +61,8 @@ namespace Films_Api
             {
                 endpoints.MapControllers();
             });
+
+            seeder.initDatabase(2);
         }
     }
 }
