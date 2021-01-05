@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "C:\\Users\\verha\\.dotnet\\store\\|arch|\\|tfm|",
+      "C:\\Users\\verha\\.nuget\\packages"
+    ]
+  }
+}
