@@ -1,4 +1,9 @@
-@import "~bootstrap/scss/bootstrap.scss";
-@import "~@fortawesome/fontawesome-free/css/all.min.css";
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~@fortawesome/fontawesome-free/css/all.min.css';
 
-@import "buffalo";
+@import 'buffalo';
+
+@import 'generic/normalize';
+
+@import 'components/main';
+@import 'components/CardsOverview';
