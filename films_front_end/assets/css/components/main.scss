@@ -1,4 +1,15 @@
 .c-app {
-  background-color: rgb(31, 31, 31);
-  height: 100%;
+  background-color: transparent;
+}
+.c-app-row {
+  margin: 0;
+}
+.c-app-col {
+  padding: 0px 10px;
+  border-radius: 3px;
+  transition: ease-in-out 0.15s;
+  &:hover {
+    background-color: rgb(88, 88, 88);
+    transition: ease-in-out 0.15s;
+  }
 }

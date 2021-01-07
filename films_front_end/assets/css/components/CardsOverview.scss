@@ -1,5 +1,7 @@
 .c-card-body {
   padding: 0;
+  border-radius: 3px;
+  transition: ease-in-out 0.15s;
 }
 .c-card-div {
   margin: 6px;
@@ -11,4 +13,7 @@
 }
 .c-card-title {
   color: white;
+  text-align: center;
+  width: 100%;
+  box-sizing: inline;
 }

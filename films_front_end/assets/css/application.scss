@@ -1,9 +1,19 @@
+//BOOTSTRAP
 @import '~bootstrap/scss/bootstrap.scss';
+
+//FONTS
 @import '~@fortawesome/fontawesome-free/css/all.min.css';
 
-@import 'buffalo';
+// SETTINGS
+@import 'settings/colors';
 
+// GENERIC
 @import 'generic/normalize';
 
+// COMPONENTS
+@import 'components/buffalo';
+@import 'components/buttons';
 @import 'components/main';
 @import 'components/CardsOverview';
+@import 'components/login';
+@import 'components/filmDetail';

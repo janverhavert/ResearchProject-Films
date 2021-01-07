@@ -1,7 +1,9 @@
 {
-  "application.css": "application.3c7cfb12bccb45152ccf.css",
-  "application.js": "application.020554629f62aa7949b0.js",
+  "application.css": "application.26f6f0ebdba44a4df71b.css",
+  "application.js": "application.7bb834f62e073007c997.js",
   "images/Poster.jpg": "images/Poster.jpg",
   "images/favicon.ico": "images/favicon.ico",
-  "images/logo.svg": "images/logo.svg"
+  "images/logo.svg": "images/logo.svg",
+  "images/star-empty.svg": "images/star-empty.svg",
+  "images/star-full.svg": "images/star-full.svg"
 }

@@ -1,0 +1,66 @@
+.c-app-buttons {
+  border-color: map-get($colors-main, $key: 'normal');
+  color: map-get($colors-main, $key: 'normal');
+  background-color: transparent;
+  &-grey {
+    border-color: map-get($colors-normal, $key: 'dark');
+    color: map-get($colors-normal, $key: 'dark');
+    background-color: white;
+    &:hover {
+      border-color: map-get($colors-main, $key: 'dark');
+      color: white;
+      background-color: map-get($colors-main, $key: 'normal');
+    }
+    &:focus {
+      border-color: map-get($colors-main, $key: 'dark');
+      color: white;
+      background-color: map-get($colors-main, $key: 'normal');
+      box-shadow: 0 0 0 0.2rem map-get($colors-main, $key: 'light');
+    }
+    &:active {
+      border-color: map-get($colors-main, $key: 'dark') !important;
+      color: white !important;
+      background-color: map-get($colors-main, $key: 'light') !important;
+      box-shadow: 0 0 0 0.2rem map-get($colors-main, $key: 'light') !important;
+    }
+  }
+  &:hover {
+    border-color: map-get($colors-main, $key: 'dark');
+    color: white;
+    background-color: map-get($colors-main, $key: 'normal');
+  }
+  &:focus {
+    border-color: map-get($colors-main, $key: 'dark');
+    color: white;
+    background-color: map-get($colors-main, $key: 'normal');
+    box-shadow: 0 0 0 0.2rem map-get($colors-main, $key: 'light');
+  }
+  &:active {
+    border-color: map-get($colors-main, $key: 'dark') !important;
+    color: white !important;
+    background-color: map-get($colors-main, $key: 'light') !important;
+    box-shadow: 0 0 0 0.2rem map-get($colors-main, $key: 'light') !important;
+  }
+  &-selected {
+    border-color: map-get($colors-main, $key: 'dark');
+    color: white;
+    background-color: map-get($colors-main, $key: 'normal');
+    &:hover {
+      border-color: map-get($colors-main, $key: 'dark');
+      color: white;
+      background-color: map-get($colors-main, $key: 'light');
+    }
+    &:focus {
+      border-color: map-get($colors-main, $key: 'dark');
+      color: white;
+      background-color: map-get($colors-main, $key: 'normal');
+      box-shadow: 0 0 0 0.2rem map-get($colors-main, $key: 'light');
+    }
+    &:active {
+      border-color: map-get($colors-main, $key: 'dark') !important;
+      color: white !important;
+      background-color: map-get($colors-main, $key: 'light') !important;
+      box-shadow: 0 0 0 0.2rem map-get($colors-main, $key: 'light') !important;
+    }
+  }
+}
