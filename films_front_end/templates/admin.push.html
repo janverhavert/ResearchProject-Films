@@ -1,0 +1,50 @@
+<main class="container">
+    <h1 class="text-center text-light">Admin</h1>
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-12">
+          <div class="card-body c-filmsdetail-card-body">
+            <Link to="/movie-toevoegen">
+              <button class="btn btn-primary c-app-buttons-selected c-toevoegen-button" type="button">
+                Film toevoegen
+              </button>
+            </Link>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Id</th>
+                  <th scope="col">Film</th>
+                  <th scope="col">Release datum</th>
+                  <th scope="col"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <th scope="row">{id}</th>
+                    <td>{title}</td>
+                    <td>{date}</td>
+                    <td>
+                      <div>
+                        <Link id={id} to={`/movie-tijdsloten/${id}`}>
+                          <button class="btn btn-primary  c-table-button c-app-buttons-selected " type="button">
+                            Reviews
+                          </button>
+                        </Link>
+                        <Link id={id} to={`/movie-edit/${id}`}>
+                          <button class="btn btn-primary c-table-button c-app-buttons-selected " type="button">
+                            Edit
+                          </button>
+                        </Link>
+                        <button class="btn btn-primary c-table-button  c-app-buttons-selected " type="button" onClick={Delete}>
+                          Delete
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>

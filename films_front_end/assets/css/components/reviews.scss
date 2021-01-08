@@ -1,0 +1,19 @@
+.c-reviews {
+  width: 100%;
+  margin: 12px 0;
+}
+.c-review-card {
+  height: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.c-reviews-review-img {
+  width: 100%;
+}
+.c-review-delete {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+}
