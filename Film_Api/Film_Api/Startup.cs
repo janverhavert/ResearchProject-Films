@@ -40,6 +40,7 @@ namespace Film_Api
             services.AddScoped(typeof(IFilmRepo), typeof(FilmRepo));
             services.AddScoped(typeof(IReviewRepo), typeof(ReviewRepo));
             services.AddScoped(typeof(IGenreRepo), typeof(GenreRepo));
+            services.AddScoped(typeof(IWatchedRepo), typeof(WatchedRepo));
 
             services.AddScoped<Seeder>();
         }
@@ -63,7 +64,7 @@ namespace Film_Api
                 endpoints.MapControllers();
             });
 
-            seeder.initDatabase(2);
+            //seeder.initDatabase(2);
         }
     }
 }

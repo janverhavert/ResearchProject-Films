@@ -42,6 +42,34 @@ namespace Film_Api.Repositories
                 throw exc;
             }
         }
+        public async Task<Film> GetAllFilms()
+        {
+            try
+            {
+
+                var query = context.Films.Find(r => r.Serie == false); //cursor
+                Film restoEntity = await query.FirstOrDefaultAsync<Film>();
+                return restoEntity;
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+        }
+        public async Task<Film> GetAllSeries()
+        {
+            try
+            {
+
+                var query = context.Films.Find(r => r.Serie == true); //cursor
+                Film restoEntity = await query.FirstOrDefaultAsync<Film>();
+                return restoEntity;
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+        }
 
         public async Task<Film> GetFilmById(string id)
         {

@@ -27,6 +27,9 @@ namespace Film_Api.Data
         public IMongoCollection<Genre> Genres =>
                         Database.GetCollection<Genre>("Genres");
 
+        public IMongoCollection<Watched> Watched =>
+                       Database.GetCollection<Watched>("watched");
+
 
         //public GridFSBucket ImagesBucket => new GridFSBucket(Database);
     }

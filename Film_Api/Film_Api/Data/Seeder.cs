@@ -13,17 +13,19 @@ namespace Film_Api.Data
         private readonly IFilmRepo filmRepo;
         private readonly IReviewRepo reviewRepo;
         private readonly IGenreRepo genreRepo;
+        private readonly IWatchedRepo watchedRepo;
         private readonly FilmsServicesContext context;
 
         //Instantie oproepen vanuit Startup>> configure , met registratie in ConfigureServices.
 
         public List<Guid> Lst_FilmGuids { get; set; } = new List<Guid>();
 
-        public Seeder(IFilmRepo filmRepo, IReviewRepo reviewRepo, IGenreRepo genreRepo, FilmsServicesContext context)
+        public Seeder(IFilmRepo filmRepo, IReviewRepo reviewRepo, IGenreRepo genreRepo, FilmsServicesContext context, IWatchedRepo watchedRepo)
         {
             this.filmRepo = filmRepo;
             this.reviewRepo = reviewRepo;
             this.genreRepo = genreRepo;
+            this.watchedRepo = watchedRepo;
             this.context = context;
         }
 
@@ -75,6 +77,34 @@ namespace Film_Api.Data
                                 {
                                     GenreId = Guid.Parse("822ff23f-0843-41c1-8b3b-b5cab9328c9b"),
                                     GenreNaam = "Thriller"
+                                },
+                                 new Film.Genre()
+                                {
+                                    GenreId = Guid.Parse("d537acff-4b4e-4c50-8897-f185c82f4743"),
+                                    GenreNaam = "Romantiek"
+                                }
+                            }
+                        });
+                        filmRepo.CreateAsync(new Film
+                        {
+                            FilmId = currentId,
+                            Titel = "TestSerie" + i,
+                            Director = "Director" + i,
+                            Serie = true,
+                            Duur = 1 + new Random().Next(10),
+                            ReleaseDatum = DateTime.Now,
+                            Discription = "SerieDiscription 1" + i,
+                            Genres = new List<Film.Genre>()
+                            {
+                                new Film.Genre()
+                                {
+                                    GenreId = Guid.Parse("822ff23f-0843-41c1-8b3b-b5cab9328c9b"),
+                                    GenreNaam = "Thriller"
+                                },
+                                 new Film.Genre()
+                                {
+                                    GenreId = Guid.Parse("d537acff-4b4e-4c50-8897-f185c82f4743"),
+                                    GenreNaam = "Romantiek"
                                 }
                             }
                         });
@@ -96,7 +126,19 @@ namespace Film_Api.Data
 
                     });
 
+                    watchedRepo.CreateAsync(new Watched
+                    {
+                        Id = new MongoDB.Bson.ObjectId(),
+                        FilmId = Lst_FilmGuids[new Random().Next(Lst_FilmGuids.Count)],
+                        UserId = Guid.Parse("4a1d2de4-44d2-4481-a37e-a33e234b9340"),
+
+                    });
+
                     //zoekindexen aanmaken op Mongo
+                    IndexKeysDefinition<Watched> Watchedkeys = "{ FilmId: 1 }";
+                    var indexModelw = new CreateIndexModel<Watched>(Watchedkeys);
+                    context.Watched.Indexes.CreateOneAsync(indexModelw);
+
                     IndexKeysDefinition<Review> keys = "{ FilmId: 1 }";
                     var indexModel = new CreateIndexModel<Review>(keys);
                     context.Reviews.Indexes.CreateOneAsync(indexModel);

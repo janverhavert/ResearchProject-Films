@@ -17,16 +17,26 @@ namespace Film_Api.Controllers
     public class FilmsController : ControllerBase
     {
         private readonly IFilmRepo filmRepo;
+        private readonly IWatchedRepo watchedRepo;
 
-        public FilmsController(IFilmRepo filmRepo)
+        public FilmsController(IFilmRepo filmRepo, IWatchedRepo watchedRepo)
         {
             this.filmRepo = filmRepo;
+            this.watchedRepo = watchedRepo;
         }
         [HttpGet]
         [Route("/api/Films")]
-        public async Task<ActionResult<IEnumerable<Film>>> GetRestaurants()
+        public async Task<ActionResult<IEnumerable<Film>>> GetFilms()
         {
-            var films = await filmRepo.GetAll();
+            var films = await filmRepo.GetAllFilms();
+            return Ok(films);
+        }
+
+        [HttpGet]
+        [Route("/api/Series")]
+        public async Task<ActionResult<IEnumerable<Film>>> GetSeries()
+        {
+            var films = await filmRepo.GetAllSeries();
             return Ok(films);
         }
 
@@ -46,7 +56,7 @@ namespace Film_Api.Controllers
                 return NotFound();
             }
 
-            // var restoDTO = mapper.Map<RestaurantDTO>(resto);
+            // var restoDTO = mapper.Map<FilmDTO>(resto);
             return Ok(film);
         }
 
@@ -66,7 +76,7 @@ namespace Film_Api.Controllers
                 return NotFound();
             }
 
-            // var restoDTO = mapper.Map<RestaurantDTO>(resto);
+            // var restoDTO = mapper.Map<FilmDTO>(resto);
             return Ok(film);
         }
 
@@ -86,7 +96,26 @@ namespace Film_Api.Controllers
                 return NotFound();
             }
 
-            // var restoDTO = mapper.Map<RestaurantDTO>(resto);
+            // var restoDTO = mapper.Map<FilmDTO>(resto);
+            return Ok(film);
+        }
+        [HttpGet]
+        [Route("/api/Films/Reviews/User/{id}")]
+        public async Task<ActionResult<Film>> GetWatchedByUserId(string id)
+        {
+            if (id == null || id == "")
+            {
+                return BadRequest();
+            }
+
+            var film = await watchedRepo.GetWachtedByUserId(id);
+
+            if (film == null)
+            {
+                return NotFound();
+            }
+
+            // var restoDTO = mapper.Map<FilmDTO>(resto);
             return Ok(film);
         }
 
@@ -132,7 +161,7 @@ namespace Film_Api.Controllers
                 return BadRequest();
             }
 
-            //restaurant ophalen (op ObjecId of RestaurantId)
+            //Film ophalen (op ObjecId of FilmId)
             if (filmRepo.GetFilmById(filmId) == null)
             {
                 return NotFound("Film bestaat niet.");
@@ -150,7 +179,7 @@ namespace Film_Api.Controllers
             }
 
             ////Indien een mapper 
-            // Restaurant resto = mapper.Map<Restaurant>(restaurantDTO);
+            // Film resto = mapper.Map<Film>(filmDTO);
 
             //2. try update
             try

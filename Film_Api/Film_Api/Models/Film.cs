@@ -28,6 +28,9 @@ namespace Film_Api.Models
         public int Duur { get; set; }
 
         [BsonElement]
+        public bool Serie { get; set; } = false;
+
+        [BsonElement]
         public DateTime ReleaseDatum { get; set; }
 
         [BsonElement]
