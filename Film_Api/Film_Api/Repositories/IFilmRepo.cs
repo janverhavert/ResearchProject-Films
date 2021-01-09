@@ -9,8 +9,8 @@ namespace Film_Api.Repositories
         Task<bool> CollectionExistsAsync(string filmName);
         Task<Film> CreateAsync(Film film);
         Task<IEnumerable<Film>> GetAll();
-        Task<Film> GetAllFilms();
-        Task<Film> GetAllSeries();
+        Task<IEnumerable<Film>> GetAllFilms();
+        Task<IEnumerable<Film>> GetAllSeries();
         Task<Film> GetFilmById(string id);
         Task<IEnumerable<Film>> GetFilmByName(string name);
         Task<IEnumerable<Review>> GetReviewsForFilm(string id);

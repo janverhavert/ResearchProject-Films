@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Film_Api.Data;
 using Film_Api.Repositories;
+using Film_Api.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -41,8 +42,19 @@ namespace Film_Api
             services.AddScoped(typeof(IReviewRepo), typeof(ReviewRepo));
             services.AddScoped(typeof(IGenreRepo), typeof(GenreRepo));
             services.AddScoped(typeof(IWatchedRepo), typeof(WatchedRepo));
-
+            services.AddScoped(typeof(IFileHandlers), typeof(FileHandlers));
             services.AddScoped<Seeder>();
+
+            //CORS
+            services.AddCors(options =>
+            {
+                options.AddPolicy("MyAllowOrigins", builder =>
+                {
+                    builder.AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowAnyOrigin();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -56,7 +68,7 @@ namespace Film_Api
            //app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors("MyAllowOrigins");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

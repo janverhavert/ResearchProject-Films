@@ -42,28 +42,48 @@ namespace Film_Api.Repositories
                 throw exc;
             }
         }
-        public async Task<Film> GetAllFilms()
+        public async Task<IEnumerable<Film>> GetAllFilms()
         {
             try
             {
 
-                var query = context.Films.Find(r => r.Serie == false); //cursor
-                Film restoEntity = await query.FirstOrDefaultAsync<Film>();
-                return restoEntity;
+                //1. docs ophalen  (case sensitive!!!) 
+                IMongoCollection<Film> collection =
+                 context.Database.GetCollection<Film>("films");
+                //context.Restaurants
+
+                //2. docs bevragen (Mongo query) en returnen
+                //noot: alle mongo methodes bestaan synchroon en asynchroon
+                IEnumerable<Film> result = await
+                 collection.Find(r => r.Serie == false).SortBy(r => r.Titel).ToListAsync<Film>();
+                //var result = await context.Restaurants.Find(_ => true).ToListAsync<Restaurant>();
+
+                //3. Return query resultaat
+                return result;
             }
             catch (Exception exc)
             {
                 throw exc;
             }
         }
-        public async Task<Film> GetAllSeries()
+        public async Task<IEnumerable<Film>> GetAllSeries()
         {
             try
             {
 
-                var query = context.Films.Find(r => r.Serie == true); //cursor
-                Film restoEntity = await query.FirstOrDefaultAsync<Film>();
-                return restoEntity;
+                //1. docs ophalen  (case sensitive!!!) 
+                IMongoCollection<Film> collection =
+                 context.Database.GetCollection<Film>("films");
+                //context.Restaurants
+
+                //2. docs bevragen (Mongo query) en returnen
+                //noot: alle mongo methodes bestaan synchroon en asynchroon
+                IEnumerable<Film> result = await
+                 collection.Find(r => r.Serie == false).SortBy(r => r.Titel).ToListAsync<Film>();
+                //var result = await context.Restaurants.Find(_ => true).ToListAsync<Restaurant>();
+
+                //3. Return query resultaat
+                return result;
             }
             catch (Exception exc)
             {

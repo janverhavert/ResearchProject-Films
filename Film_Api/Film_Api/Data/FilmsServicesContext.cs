@@ -1,5 +1,6 @@
 ﻿using Film_Api.Models;
 using MongoDB.Driver;
+using MongoDB.Driver.GridFS;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,6 @@ namespace Film_Api.Data
                        Database.GetCollection<Watched>("watched");
 
 
-        //public GridFSBucket ImagesBucket => new GridFSBucket(Database);
+        public GridFSBucket ImagesBucket => new GridFSBucket(Database);
     }
 }
