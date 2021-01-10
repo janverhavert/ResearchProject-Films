@@ -60,7 +60,8 @@ namespace Film_Api.Data
 
                     if (!filmRepo.CollectionExistsAsync("TestResto" + i).Result)
                     {
-
+                        Random gen = new Random();
+                        int prob = gen.Next(100);
                         Guid currentId = Guid.NewGuid();
                         Lst_FilmGuids.Add(currentId);
                         filmRepo.CreateAsync(new Film
@@ -69,31 +70,9 @@ namespace Film_Api.Data
                             Titel = "TestFilm" + i,
                             Director = "Director" + i,
                             Duur = 60 + new Random().Next(80),
+                            Serie = prob <= 50,
                             ReleaseDatum = DateTime.Now,
                             Discription = "FilmDiscription 1" + i,
-                            Genres = new List<Film.Genre>()
-                            {
-                                new Film.Genre()
-                                {
-                                    GenreId = Guid.Parse("822ff23f-0843-41c1-8b3b-b5cab9328c9b"),
-                                    GenreNaam = "Thriller"
-                                },
-                                 new Film.Genre()
-                                {
-                                    GenreId = Guid.Parse("d537acff-4b4e-4c50-8897-f185c82f4743"),
-                                    GenreNaam = "Romantiek"
-                                }
-                            }
-                        });
-                        filmRepo.CreateAsync(new Film
-                        {
-                            FilmId = currentId,
-                            Titel = "TestSerie" + i,
-                            Director = "Director" + i,
-                            Serie = true,
-                            Duur = 1 + new Random().Next(10),
-                            ReleaseDatum = DateTime.Now,
-                            Discription = "SerieDiscription 1" + i,
                             Genres = new List<Film.Genre>()
                             {
                                 new Film.Genre()
