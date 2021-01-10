@@ -52,6 +52,7 @@ func App() *buffalo.App {
 		app.Use(translations())
 
 		app.GET("/", HomeHandler)
+		app.GET("/series", SeriesHandler)
 		app.GET("/registreren", RegistrerenHandler)
 		app.GET("/login", LoginHandler)
 		app.GET("/film/{id}", FilmDetailHandler)
