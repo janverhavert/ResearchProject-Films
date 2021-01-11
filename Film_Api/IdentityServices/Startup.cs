@@ -37,6 +37,16 @@ namespace IdentityServices
             .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            //CORS
+            services.AddCors(options =>
+            {
+                options.AddPolicy("MyAllowOrigins", builder =>
+                {
+                    builder.AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowAnyOrigin();
+                });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +67,7 @@ namespace IdentityServices
             //app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseCors("MyAllowOrigins");
             app.UseAuthentication();
             app.UseAuthorization();
             RoleManager<Role> roleManager = serviceProvider.GetRequiredService<RoleManager<Role>>();

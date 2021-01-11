@@ -73,6 +73,8 @@ namespace IdentityServices.Services
                 await userManager.RemoveClaimsAsync(user, userClaims);
 
                 await userManager.AddClaimAsync(user, new Claim("myExtraKey", "myExtraValue"));
+                await userManager.AddClaimAsync(user, new Claim("thisUserId", user.Id));
+
                 //combined string van roles kan niet => ClaimTypes.Role
                 foreach (var role in roles)
                 {
@@ -133,11 +135,11 @@ namespace IdentityServices.Services
             {
                 identity = (ClaimsIdentity)principal.Identity;
             }
-            catch (NullReferenceException)
+            catch
             {
                 return Guid.Empty;
             }
-            var userIdClaim = identity.FindFirst("userId");
+            var userIdClaim = identity.FindFirst("thisUserId");
             var userId = new Guid(userIdClaim.Value);
             return userId;
         }
@@ -167,8 +169,9 @@ namespace IdentityServices.Services
                       parameters, out securityToken);
                 return principal;
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return null;
             }
         }

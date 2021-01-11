@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IdentityServices.Models;
 using IdentityServices.Services;
+using IdentityServices.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -82,9 +83,10 @@ namespace IdentityServices.Controllers
         }
 
         [HttpGet("validate")]
-        public async Task<IActionResult> Validate([FromQuery(Name = "email")] string email, [FromQuery(Name = "token")] string token)
+        [Route("loginData")]
+        public async Task<IActionResult> Validate([FromQuery(Name = "name")] string name, [FromQuery(Name = "token")] string token)
         {
-            var user = await userManager.FindByEmailAsync(email);
+            var user = await userManager.FindByNameAsync(name);
             if (user == null)
             {
                 return NotFound("User not found.");
@@ -99,6 +101,21 @@ namespace IdentityServices.Controllers
             }
 
             return new OkObjectResult(userId);
+        }
+        [HttpGet("userData")]
+        [Route("UserData")]
+        public async Task<IActionResult> UserData([FromQuery(Name = "userId")] string userId)
+        {
+           var user = await userManager.FindByIdAsync(userId);
+            var assignRolesToUserVM = new RolesForUser_VM()
+            {
+                AssignedRoles = await userManager.GetRolesAsync(user),
+                UnAssignedRoles = new List<string>(),
+                User = user,
+                UserId = userId
+            };
+
+            return new OkObjectResult(assignRolesToUserVM);
         }
     }
 }
