@@ -1,27 +1,23 @@
 <main class="c-inloggen-main">
-    <div class="card mb-3">
-      <div class="row no-gutters">
-        <div class="col-md-4">
-          <img src="<%= rootPath() %>assets/images/Poster.jpg" class="card-img h-100" alt="banner kinopolis" />
-        </div>
-        <div class="col-md-8">
-          <div class="card-body c-inloggen-card-body">
-            <form>
-              <h1 class="c-reservatie-titel">Inloggen</h1>
-              <div class="form-group">
-                <label htmlFor="email">Email address</label>
-                <input type="email" class="form-control" id="email" placeholder="name@example.com" />
-              </div>
-              <div class="form-group">
-                <label htmlFor="Wachtwoord">Wachtwoord</label>
-                <input type="password" class="form-control" id="Wachtwoord" placeholder="" />
-              </div>
-                <button type="submit" class="btn btn-primary c-app-buttons-selected">
-                  Inloggen
-                </button>
-            </form>
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="<%= rootPath() %>assets/images/Poster.jpg" class="card-img h-100" alt="banner kinopolis" />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body c-inloggen-card-body">
+          <h1 class="c-reservatie-titel">Inloggen</h1>
+          <div class="form-group">
+            <label htmlFor="UserName">Gebruikersnaam</label>
+            <input type="text" class="form-control" id="UserName" placeholder="" />
           </div>
+          <div class="form-group">
+            <label htmlFor="Password">Wachtwoord</label>
+            <input type="password" class="form-control" id="Password" placeholder="" />
+          </div>
+          <button type="submit" class="btn btn-primary c-app-buttons-selected" id="login">Inloggen</button>
         </div>
       </div>
     </div>
-  </main>
+  </div>
+</main>
