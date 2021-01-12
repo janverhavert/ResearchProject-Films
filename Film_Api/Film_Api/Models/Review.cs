@@ -31,6 +31,10 @@ namespace Film_Api.Models
         public DateTime DateOfCreation { get; set; } = DateTime.Now;
 
         [BsonRepresentation(BsonType.String)]
+        [BsonElement("UserId")]
+        public Guid UserId { get; set; }
+
+        [BsonRepresentation(BsonType.String)]
         [BsonElement("FilmId")]
         public Guid FilmId { get; set; }
 

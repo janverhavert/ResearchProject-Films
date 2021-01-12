@@ -17,16 +17,11 @@ namespace Film_Api.Repositories
         {
             this.context = context;
         }
-        public async Task<Watched> GetWachtedByUserId(string id)
+        public async Task<IEnumerable<Watched>> GetWatchedByUserId(string id)
         {
-            //zoek zowel op het BsonId als het RestaurantId (case sensitive)
-            ObjectId bsonId = (!ObjectId.TryParse(id, out bsonId)) ? ObjectId.Empty : ObjectId.Parse(id);
-            //guid convertie returnt lower chars!!! Guids met hoofdletters worden hierdoor niet gevonden.      
-            Guid UserId = (!Guid.TryParse(id, out UserId)) ? Guid.Empty : Guid.Parse(id);
-
-            var query = context.Watched.Find(r => r.UserId == UserId || r.Id == bsonId); //cursor
-            Watched restoEntity = await query.FirstOrDefaultAsync<Watched>();
-            return restoEntity;
+            var objId = new Guid(id);
+            var watched = await context.Watched.Find(b => b.UserId == objId).ToListAsync<Watched>();
+            return watched;
         }
         //CREATE ------
 

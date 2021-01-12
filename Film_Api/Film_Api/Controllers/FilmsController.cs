@@ -18,11 +18,13 @@ namespace Film_Api.Controllers
     {
         private readonly IFilmRepo filmRepo;
         private readonly IWatchedRepo watchedRepo;
+        private readonly IReviewRepo reviewRepo;
 
-        public FilmsController(IFilmRepo filmRepo, IWatchedRepo watchedRepo)
+        public FilmsController(IFilmRepo filmRepo, IWatchedRepo watchedRepo, IReviewRepo reviewRepo)
         {
             this.filmRepo = filmRepo;
             this.watchedRepo = watchedRepo;
+            this.reviewRepo = reviewRepo;
         }
         [HttpGet]
         [Route("/api/Films")]
@@ -100,15 +102,34 @@ namespace Film_Api.Controllers
             return Ok(film);
         }
         [HttpGet]
-        [Route("/api/Films/Reviews/User/{id}")]
-        public async Task<ActionResult<Film>> GetWatchedByUserId(string id)
+        [Route("/api/User/Reviews/{id}")]
+        public async Task<ActionResult<Review>> GetUserReviews(string id)
         {
             if (id == null || id == "")
             {
                 return BadRequest();
             }
 
-            var film = await watchedRepo.GetWachtedByUserId(id);
+            var film = await reviewRepo.GetReviewByUserId(id);
+
+            if (film == null)
+            {
+                return NotFound();
+            }
+
+            // var restoDTO = mapper.Map<FilmDTO>(resto);
+            return Ok(film);
+        }
+        [HttpGet]
+        [Route("/api/Watched/{id}")]
+        public async Task<ActionResult<Watched>> GetWatchedByUserId(string id)
+        {
+            if (id == null || id == "")
+            {
+                return BadRequest();
+            }
+
+            var film = await watchedRepo.GetWatchedByUserId(id);
 
             if (film == null)
             {

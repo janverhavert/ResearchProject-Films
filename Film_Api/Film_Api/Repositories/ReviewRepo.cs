@@ -1,5 +1,7 @@
 ﻿using Film_Api.Data;
 using Film_Api.Models;
+using MongoDB.Bson;
+using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,12 @@ namespace Film_Api.Repositories
             this.context = context;
         }
 
-
+        public async Task<IEnumerable<Review>> GetReviewByUserId(string id)
+        {
+            var objId = new Guid(id);
+            var reviews = await context.Reviews.Find(b => b.UserId == objId).ToListAsync<Review>();
+            return reviews;
+        }
         //CREATE ------
 
         public async Task<Review> CreateAsync(Review review)

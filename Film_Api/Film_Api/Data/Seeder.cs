@@ -98,9 +98,34 @@ namespace Film_Api.Data
                     {
                         Id = new MongoDB.Bson.ObjectId(),
                         FilmId = Lst_FilmGuids[new Random().Next(Lst_FilmGuids.Count)],
-                        Titel = "Pricing",
-                        Discription = "Too expensive",
+                        Titel = "very confusing",
+                        UserId = Guid.Parse("4a1d2de4-44d2-4481-a37e-a33e234b9340"),
+                        Discription = "could be better",
                         Score = 4.5M,
+
+
+                    });
+
+                    reviewRepo.CreateAsync(new Review
+                    {
+                        Id = new MongoDB.Bson.ObjectId(),
+                        FilmId = Lst_FilmGuids[new Random().Next(Lst_FilmGuids.Count)],
+                        Titel = "too long",
+                        UserId = Guid.Parse("4a1d2de4-44d2-4481-a37e-a33e234b9340"),
+                        Discription = "could be better",
+                        Score = 7.5M,
+
+
+                    });
+
+                    reviewRepo.CreateAsync(new Review
+                    {
+                        Id = new MongoDB.Bson.ObjectId(),
+                        FilmId = Lst_FilmGuids[new Random().Next(Lst_FilmGuids.Count)],
+                        Titel = "Very good",
+                        UserId = Guid.Parse("4a1d2de4-44d2-4481-a37e-a33e234b9340"),
+                        Discription = "the best film i have ever seen",
+                        Score = 9.5M,
 
 
                     });

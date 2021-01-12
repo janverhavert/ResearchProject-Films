@@ -1,11 +1,12 @@
 ﻿using Film_Api.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Film_Api.Repositories
 {
     public interface IWatchedRepo
     {
-        Task<Watched> GetWachtedByUserId(string id);
+        Task<IEnumerable<Watched>> GetWatchedByUserId(string id);
         Task<Watched> CreateAsync(Watched watched);
     }
 }
