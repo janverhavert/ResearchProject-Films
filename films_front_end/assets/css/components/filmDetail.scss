@@ -3,7 +3,8 @@
 .c-detail-info-div {
   padding-left: 0;
 }
-.c-filmsdetail-card-body {
+.c-filmdetail {
+  margin-bottom: 50px;
 }
 .c-filmsdetail-card {
   margin-bottom: 24px;
@@ -12,7 +13,11 @@
   display: inline;
 }
 .c-filmdetail-title {
+  margin-top: 15px;
 }
+// .c-film-img {
+//   max-width: 80%;
+// }
 .c-filmdetail-info-top {
   margin-right: 14px;
   font-size: 18px;
@@ -24,11 +29,16 @@
 }
 .c-filmdetail-star {
   width: 24px;
+
+  fill: grey;
+}
+.c-filmdetail-star-checked {
+  width: 24px;
+
   fill: yellow;
 }
 .c-filmsdetail-score {
   font-size: 24px;
-  margin-left: 12px;
 }
 .c-filmdetail-info-reviews {
 }

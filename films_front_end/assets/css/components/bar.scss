@@ -1,0 +1,19 @@
+.c-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(65, 65, 65);
+  padding: 0 24px;
+  margin: 0;
+  height: 50px;
+}
+.c-bar-dropdown {
+}
+.c-bar-button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: transparent;
+  margin: 0;
+}

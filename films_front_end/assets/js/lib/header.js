@@ -8,7 +8,7 @@ const header = () => {
   </a>
     `;
 
-    var htmlWatched = '<a class="nav-link" href="#">Watched list</a>';
+    var htmlWatched = '<a class="nav-link" href="/watched" id="c-watch">Watched list</a>';
     document.querySelector('#c-user').innerHTML = htmlHeaderRechts;
     document.querySelector('#c-watched').innerHTML = htmlWatched;
     if (localStorage.getItem('UserRole') == 'Admin') {
@@ -19,6 +19,7 @@ const header = () => {
       localStorage.removeItem('UserId');
       localStorage.removeItem('UserRole');
       localStorage.removeItem('UserName');
+      window.location.href = '/';
     };
   } else {
     var htmlHeaderRechts = ` <a href="/login">

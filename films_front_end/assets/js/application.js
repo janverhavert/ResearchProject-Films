@@ -6,14 +6,29 @@ require('babel-polyfill');
 
 import dataFilmCard from './lib/dataFilmCard';
 import dataFilmDetail from './lib/dataFilmDetail';
+import dataWatched from './lib/dataWatched';
 import login from './lib/login';
+import profiel from './lib/profiel';
 import header from './lib/header';
+
 document.addEventListener('DOMContentLoaded', async function () {
   header();
+
   if (window.location.href == 'http://127.0.0.1:3000/') {
+    document.querySelector('#c-filmheader').className = 'nav-link active';
     dataFilmCard('Films');
   } else if (window.location.href == 'http://127.0.0.1:3000/series') {
+    document.querySelector('#c-serie').className = 'nav-link active';
     dataFilmCard('Series');
+  } else if (window.location.href == 'http://127.0.0.1:3000/watched') {
+    document.querySelector('#c-watch').className = 'nav-link active';
+    dataWatched('Watched');
+  } else if (window.location.href == 'http://127.0.0.1:3000/profiel') {
+    if (localStorage.getItem('UserRole') == 'Admin' || localStorage.getItem('UserRole') == 'Customer') {
+      profiel();
+    } else {
+      window.location.href = '/';
+    }
   } else if (window.location.href.includes('http://127.0.0.1:3000/film')) {
     dataFilmDetail();
   } else if (window.location.href.includes('http://127.0.0.1:3000/login')) {
