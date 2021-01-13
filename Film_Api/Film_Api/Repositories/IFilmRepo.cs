@@ -14,7 +14,9 @@ namespace Film_Api.Repositories
         Task<Film> GetFilmById(string id);
 
         Task<IEnumerable<Film>> GetFilmByGenreId(string id);
+        Task<IEnumerable<Film>> GetSerieByGenreId(string id);
         Task<IEnumerable<Film>> GetFilmByName(string name);
+        Task<IEnumerable<Film>> GetSerieByName(string name);
         Task<IEnumerable<Review>> GetReviewsForFilm(string id);
         Task<string> RemoveAsync(string id);
         Task<Film> UpsertAsync(Film film);

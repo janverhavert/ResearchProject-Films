@@ -67,12 +67,36 @@ namespace Film_Api.Data
                         filmRepo.CreateAsync(new Film
                         {
                             FilmId = currentId,
-                            Titel = "TestFilm" + i,
-                            Director = "Director" + i,
+                            Titel = "Tenet",
+                            Director = "Christopher Nolan" + i,
                             Duur = 60 + new Random().Next(80),
-                            Serie = prob <= 50,
+                            Serie = false,
                             ReleaseDatum = DateTime.Now,
-                            Discription = "FilmDiscription 1" + i,
+                            Discription = "A secret agent is given a single word as his weapon and sent to prevent the onset of World War III. He must travel through time and bend the laws of nature in order to be successful in his mission.",
+                            Genres = new List<Film.Genre>()
+                            {
+                                new Film.Genre()
+                                {
+                                    GenreId = Guid.Parse("d227e9ba-8061-4a2e-a06a-e79ebf5ce8d9"),
+                                    GenreNaam = "Actie"
+                                },
+                                new Film.Genre()
+                                {
+                                    GenreId = Guid.Parse("0c61dcec-e9b6-46e0-834a-553e7cf71602"),
+                                    GenreNaam = "Avontuur"
+                                },
+                            }
+                        });
+
+                        filmRepo.CreateAsync(new Film
+                        {
+                            FilmId = currentId,
+                            Titel = "The Queen's Gambit" + i,
+                            Director = "Scott Frank",
+                            Duur = 60 + new Random().Next(80),
+                            Serie = true,
+                            ReleaseDatum = DateTime.Now,
+                            Discription = "Set during the Cold War era, orphaned chess prodigy Beth Harmon struggles with addiction in a quest to become the greatest chess player in the world.",
                             Genres = new List<Film.Genre>()
                             {
                                 new Film.Genre()

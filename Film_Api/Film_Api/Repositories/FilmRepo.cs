@@ -110,7 +110,18 @@ namespace Film_Api.Repositories
             //guid convertie returnt lower chars!!! Guids met hoofdletters worden hierdoor niet gevonden.      
             Guid genreId = (!Guid.TryParse(id, out genreId)) ? Guid.Empty : Guid.Parse(id);
 
-            var query = context.Films.Find(f => f.Genres.Any(g => g.GenreId == genreId)); //cursor
+            var query = context.Films.Find(f => f.Genres.Any(g => g.GenreId == genreId) || f.Serie == false); //cursor
+            IEnumerable<Film> restoEntity = await query.ToListAsync<Film>();
+            return restoEntity;
+        }
+        public async Task<IEnumerable<Film>> GetSerieByGenreId(string id)
+        {
+            //zoek zowel op het BsonId als het RestaurantId (case sensitive)
+            ObjectId bsonId = (!ObjectId.TryParse(id, out bsonId)) ? ObjectId.Empty : ObjectId.Parse(id);
+            //guid convertie returnt lower chars!!! Guids met hoofdletters worden hierdoor niet gevonden.      
+            Guid genreId = (!Guid.TryParse(id, out genreId)) ? Guid.Empty : Guid.Parse(id);
+
+            var query = context.Films.Find(f => f.Genres.Any(g => g.GenreId == genreId) || f.Serie == true); //cursor
             IEnumerable<Film> restoEntity = await query.ToListAsync<Film>();
             return restoEntity;
         }
@@ -124,7 +135,13 @@ namespace Film_Api.Repositories
 
         public async Task<IEnumerable<Film>> GetFilmByName(string name)
         {
-            var query = context.Films.Find(r => r.Titel.ToLower().Contains(name.ToLower()));
+            var query = context.Films.Find(r => r.Titel.ToLower().Contains(name.ToLower()) || r.Serie == false);
+            IEnumerable<Film> filmEntities = await query.ToListAsync<Film>();
+            return filmEntities;
+        }
+        public async Task<IEnumerable<Film>> GetSerieByName(string name)
+        {
+            var query = context.Films.Find(r => r.Titel.ToLower().Contains(name.ToLower()) || r.Serie == true);
             IEnumerable<Film> filmEntities = await query.ToListAsync<Film>();
             return filmEntities;
         }

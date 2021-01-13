@@ -94,6 +94,26 @@ namespace Film_Api.Controllers
         }
 
         [HttpGet]
+        [Route("/api/Series/{name}")]
+        public async Task<ActionResult<Film>> GetSerieByName(string name)
+        {
+            if (name == null || name == "")
+            {
+                return BadRequest();
+            }
+
+            var film = await filmRepo.GetSerieByName(name);
+
+            if (film == null)
+            {
+                return NotFound();
+            }
+
+            // var restoDTO = mapper.Map<FilmDTO>(resto);
+            return Ok(film);
+        }
+
+        [HttpGet]
         [Route("/api/Films/Reviews/{id}")]
         public async Task<ActionResult<Film>> GetFilmReviews(string id)
         {
@@ -152,7 +172,7 @@ namespace Film_Api.Controllers
         }
         [HttpGet]
         [Route("/api/film/genre/{id}")]
-        public async Task<ActionResult<Genre>> GetGenre(string id)
+        public async Task<ActionResult<Genre>> GetGenreForFilm(string id)
         {
             if (id == null || id == "")
             {
@@ -160,6 +180,25 @@ namespace Film_Api.Controllers
             }
 
             var film = await filmRepo.GetFilmByGenreId(id);
+
+            if (film == null)
+            {
+                return NotFound();
+            }
+
+            // var restoDTO = mapper.Map<FilmDTO>(resto);
+            return Ok(film);
+        }
+        [HttpGet]
+        [Route("/api/serie/genre/{id}")]
+        public async Task<ActionResult<Genre>> GetGenreForSerie(string id)
+        {
+            if (id == null || id == "")
+            {
+                return BadRequest();
+            }
+
+            var film = await filmRepo.GetSerieByGenreId(id);
 
             if (film == null)
             {
