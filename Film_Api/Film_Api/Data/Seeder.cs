@@ -67,8 +67,8 @@ namespace Film_Api.Data
                         filmRepo.CreateAsync(new Film
                         {
                             FilmId = currentId,
-                            Titel = "Tenet",
-                            Director = "Christopher Nolan" + i,
+                            Titel = "Tenet " + i,
+                            Director = "Christopher Nolan" ,
                             Duur = 60 + new Random().Next(80),
                             Serie = false,
                             ReleaseDatum = DateTime.Now,
@@ -91,7 +91,7 @@ namespace Film_Api.Data
                         filmRepo.CreateAsync(new Film
                         {
                             FilmId = currentId,
-                            Titel = "The Queen's Gambit" + i,
+                            Titel = "The Queen's Gambit " + i,
                             Director = "Scott Frank",
                             Duur = 60 + new Random().Next(80),
                             Serie = true,

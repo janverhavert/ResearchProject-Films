@@ -110,7 +110,7 @@ namespace Film_Api.Repositories
             //guid convertie returnt lower chars!!! Guids met hoofdletters worden hierdoor niet gevonden.      
             Guid genreId = (!Guid.TryParse(id, out genreId)) ? Guid.Empty : Guid.Parse(id);
 
-            var query = context.Films.Find(f => f.Genres.Any(g => g.GenreId == genreId) || f.Serie == false); //cursor
+            var query = context.Films.Find(f => f.Genres.Any(g => g.GenreId == genreId) && f.Serie == false); //cursor
             IEnumerable<Film> restoEntity = await query.ToListAsync<Film>();
             return restoEntity;
         }
@@ -121,7 +121,7 @@ namespace Film_Api.Repositories
             //guid convertie returnt lower chars!!! Guids met hoofdletters worden hierdoor niet gevonden.      
             Guid genreId = (!Guid.TryParse(id, out genreId)) ? Guid.Empty : Guid.Parse(id);
 
-            var query = context.Films.Find(f => f.Genres.Any(g => g.GenreId == genreId) || f.Serie == true); //cursor
+            var query = context.Films.Find(f => f.Genres.Any(g => g.GenreId == genreId) && f.Serie == true); //cursor
             IEnumerable<Film> restoEntity = await query.ToListAsync<Film>();
             return restoEntity;
         }
@@ -135,13 +135,13 @@ namespace Film_Api.Repositories
 
         public async Task<IEnumerable<Film>> GetFilmByName(string name)
         {
-            var query = context.Films.Find(r => r.Titel.ToLower().Contains(name.ToLower()) || r.Serie == false);
+            var query = context.Films.Find(r => r.Titel.ToLower().Contains(name.ToLower()) && r.Serie == false);
             IEnumerable<Film> filmEntities = await query.ToListAsync<Film>();
             return filmEntities;
         }
         public async Task<IEnumerable<Film>> GetSerieByName(string name)
         {
-            var query = context.Films.Find(r => r.Titel.ToLower().Contains(name.ToLower()) || r.Serie == true);
+            var query = context.Films.Find(r => r.Titel.ToLower().Contains(name.ToLower()) && r.Serie == true);
             IEnumerable<Film> filmEntities = await query.ToListAsync<Film>();
             return filmEntities;
         }

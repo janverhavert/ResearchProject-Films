@@ -171,7 +171,7 @@ namespace Film_Api.Controllers
             return Ok(film);
         }
         [HttpGet]
-        [Route("/api/film/genre/{id}")]
+        [Route("/api/films/genre/{id}")]
         public async Task<ActionResult<Genre>> GetGenreForFilm(string id)
         {
             if (id == null || id == "")
@@ -190,7 +190,7 @@ namespace Film_Api.Controllers
             return Ok(film);
         }
         [HttpGet]
-        [Route("/api/serie/genre/{id}")]
+        [Route("/api/series/genre/{id}")]
         public async Task<ActionResult<Genre>> GetGenreForSerie(string id)
         {
             if (id == null || id == "")
