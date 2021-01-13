@@ -18,7 +18,7 @@ namespace Film_Api.Repositories
             this.context = context;
         }
 
-        public async Task<IEnumerable<Genre>> GetAll()
+        public async Task<IEnumerable<Genre>> GetAllGenres()
         {
             try
             {

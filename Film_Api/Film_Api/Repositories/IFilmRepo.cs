@@ -12,6 +12,8 @@ namespace Film_Api.Repositories
         Task<IEnumerable<Film>> GetAllFilms();
         Task<IEnumerable<Film>> GetAllSeries();
         Task<Film> GetFilmById(string id);
+
+        Task<IEnumerable<Film>> GetFilmByGenreId(string id);
         Task<IEnumerable<Film>> GetFilmByName(string name);
         Task<IEnumerable<Review>> GetReviewsForFilm(string id);
         Task<string> RemoveAsync(string id);

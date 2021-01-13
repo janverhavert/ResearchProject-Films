@@ -19,12 +19,14 @@ namespace Film_Api.Controllers
         private readonly IFilmRepo filmRepo;
         private readonly IWatchedRepo watchedRepo;
         private readonly IReviewRepo reviewRepo;
+        private readonly IGenreRepo genreRepo;
 
-        public FilmsController(IFilmRepo filmRepo, IWatchedRepo watchedRepo, IReviewRepo reviewRepo)
+        public FilmsController(IFilmRepo filmRepo, IWatchedRepo watchedRepo, IReviewRepo reviewRepo, IGenreRepo genreRepo)
         {
             this.filmRepo = filmRepo;
             this.watchedRepo = watchedRepo;
             this.reviewRepo = reviewRepo;
+            this.genreRepo = genreRepo;
         }
         [HttpGet]
         [Route("/api/Films")]
@@ -41,6 +43,15 @@ namespace Film_Api.Controllers
             var films = await filmRepo.GetAllSeries();
             return Ok(films);
         }
+
+        [HttpGet]
+        [Route("/api/Genres")]
+        public async Task<ActionResult<IEnumerable<Genre>>> GetGenres()
+        {
+            var genres = await genreRepo.GetAllGenres();
+            return Ok(genres);
+        }
+
 
         [HttpGet]
         [Route("/api/Film/{id}")]
@@ -139,7 +150,25 @@ namespace Film_Api.Controllers
             // var restoDTO = mapper.Map<FilmDTO>(resto);
             return Ok(film);
         }
+        [HttpGet]
+        [Route("/api/film/genre/{id}")]
+        public async Task<ActionResult<Genre>> GetGenre(string id)
+        {
+            if (id == null || id == "")
+            {
+                return BadRequest();
+            }
 
+            var film = await filmRepo.GetFilmByGenreId(id);
+
+            if (film == null)
+            {
+                return NotFound();
+            }
+
+            // var restoDTO = mapper.Map<FilmDTO>(resto);
+            return Ok(film);
+        }
         [HttpPost()]
         public async Task<ActionResult<Film>> PostFilm([FromBody] Film film)
         {

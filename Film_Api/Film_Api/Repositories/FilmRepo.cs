@@ -103,6 +103,18 @@ namespace Film_Api.Repositories
             return restoEntity;
         }
 
+        public async Task<IEnumerable<Film>> GetFilmByGenreId(string id)
+        {
+            //zoek zowel op het BsonId als het RestaurantId (case sensitive)
+            ObjectId bsonId = (!ObjectId.TryParse(id, out bsonId)) ? ObjectId.Empty : ObjectId.Parse(id);
+            //guid convertie returnt lower chars!!! Guids met hoofdletters worden hierdoor niet gevonden.      
+            Guid genreId = (!Guid.TryParse(id, out genreId)) ? Guid.Empty : Guid.Parse(id);
+
+            var query = context.Films.Find(f => f.Genres.Any(g => g.GenreId == genreId)); //cursor
+            IEnumerable<Film> restoEntity = await query.ToListAsync<Film>();
+            return restoEntity;
+        }
+
         public async Task<IEnumerable<Review>> GetReviewsForFilm(string id)
         {
             var objId = new Guid(id);
