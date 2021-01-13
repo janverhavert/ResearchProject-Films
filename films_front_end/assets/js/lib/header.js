@@ -11,10 +11,12 @@ const header = () => {
     var htmlWatched = '<a class="nav-link" href="/watched" id="c-watch">Watched list</a>';
     document.querySelector('#c-user').innerHTML = htmlHeaderRechts;
     document.querySelector('#c-watched').innerHTML = htmlWatched;
+
     if (localStorage.getItem('UserRole') == 'Admin') {
       var htmlAdmin = '<a class="nav-link" href="/admin">Admin</a>';
       document.querySelector('#c-admin').innerHTML = htmlAdmin;
     }
+
     document.getElementById('logout').onclick = function () {
       localStorage.removeItem('UserId');
       localStorage.removeItem('UserRole');

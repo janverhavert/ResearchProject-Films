@@ -1,12 +1,17 @@
 <main class="c-app">
-  <div class="row c-app-row c-film" id="c-films">
-    <div class="col-sm-6 col-md-1 col-lg-1 c-app-col">
-      <div class="card c-card-div text-center pl-0">
-        <div class="card-body c-card-body">
-          <img src="<%= rootPath() %>assets/images/Poster.jpg" class="d-block w-100 c-card-img" alt="..." />
-          <h7 class="card-title c-card-title"> Avengers </h7>
-        </div>
+  <div class="row c-bar text-light bg-dark">
+    <div class="dropdown c-bar-dropdown col-1">
+      <button class="btn dropdown-toggle c-bar-button text-light" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">Categorieen</button>
+      <ul class="dropdown-menu bg-dark" aria-labelledby="dropdownMenu2" id="c-categorieen"></ul>
+    </div>
+    <div class="col-3 row">
+      <div class="col-9 c-bar-input">
+        <input type="text" id="search" class="form-control" />
+      </div>
+      <div class="col-3">
+        <label for="search" class="col-form-label" id="searchknop">Search</label>
       </div>
     </div>
   </div>
+  <div class="row c-app-row c-film" id="c-films"></div>
 </main>

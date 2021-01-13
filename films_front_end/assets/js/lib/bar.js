@@ -1,38 +1,32 @@
 import Genre from '../components/genreDropdown';
-import Films from '../components/filmCard';
+import dataGet from '../lib/dataGet';
 import dataAccess from '../lib/dataAccess';
-const bar = async () => {
+
+const bar = async (type) => {
   const data = await dataAccess.api.get('Genres');
-  console.log(data);
   let filmString = '';
   for (const film of data) {
     const b = new Genre(film);
     filmString += b.render();
   }
-  if (!filmString == '') {
+  if (!filmString == []) {
     document.querySelector('#c-categorieen').innerHTML = filmString;
   } else {
-    document.querySelector('c-films').innerHTML = 'geen films gevonden';
+    document.querySelector('#c-categorieen').innerHTML = 'geen genre gevonden';
   }
 
   const input = document.querySelector('input');
-  input.addEventListener('change', updateValue);
-  async function updateValue(e) {
-    let urlValue = e.target.value;
-    let url = `films/${urlValue}`;
-    const data = await dataAccess.api.get(url);
-    console.log(data);
 
-    let filmString = '';
-    for (const film of data) {
-      const b = new Films(film);
-      filmString += b.render();
-    }
-    if (!filmString == '') {
-      document.querySelector('#c-films').innerHTML = filmString;
-    } else {
-      document.querySelector('c-books').innerHTML = 'geen book gevonden';
-    }
+  input.addEventListener('change', function () {
+    dataGet.call(this, type + '/' + input.value);
+  });
+
+  const genres = document.querySelectorAll('.c-dropdown-item');
+
+  for (const genre of genres) {
+    genre.onclick = function () {
+      dataGet.call(this, type + '/genre/' + genre.id);
+    };
   }
 };
 

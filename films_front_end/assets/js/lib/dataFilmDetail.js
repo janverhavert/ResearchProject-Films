@@ -1,6 +1,7 @@
-import Film from '../components/filmDetail';
+import filmDetail from '../components/filmDetail';
 import Reviews from '../components/reviewsFilm';
 import dataAccess from '../lib/dataAccess';
+import starSystem from '../lib/starSystem';
 const dataFilmDetail = async () => {
   var url = window.location.pathname;
   var id = url.substring(url.lastIndexOf('/') + 1);
@@ -15,25 +16,17 @@ const dataFilmDetail = async () => {
     (sum += dataReviews[i].score), 10; //don't forget to add the base
   }
   var avg = sum / dataReviews.length;
-
-  let filmString = '';
   data['avg'] = avg;
   data['reviews'] = dataReviews;
-  const b = new Film(data);
 
-  filmString += b.render();
-  if (!filmString == '') {
-    document.querySelector('#c-film').innerHTML = filmString;
-  } else {
-    document.querySelector('#c-film').innerHTML = 'geen films gevonden';
-  }
+  filmDetail(data);
 
   let reviewString = '';
   for (const review of dataReviews) {
     const b = new Reviews(review);
     reviewString += b.render();
   }
-  if (!reviewString == '') {
+  if (!reviewString == []) {
     document.querySelector('#c-reviews').innerHTML = reviewString;
   } else {
     document.querySelector('#c-reviews').innerHTML = 'Wees de eerste';

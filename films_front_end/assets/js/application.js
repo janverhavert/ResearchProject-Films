@@ -15,13 +15,14 @@ import header from './lib/header';
 
 document.addEventListener('DOMContentLoaded', async function () {
   header();
-  bar();
   if (window.location.href == 'http://127.0.0.1:3000/') {
     document.querySelector('#c-filmheader').className = 'nav-link active';
     dataFilmCard('Films');
+    bar('Films');
   } else if (window.location.href == 'http://127.0.0.1:3000/series') {
     document.querySelector('#c-serie').className = 'nav-link active';
     dataFilmCard('Series');
+    bar('Series');
   } else if (window.location.href == 'http://127.0.0.1:3000/watched') {
     document.querySelector('#c-watch').className = 'nav-link active';
     dataWatched('Watched');

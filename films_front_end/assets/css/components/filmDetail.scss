@@ -12,6 +12,17 @@
 .c-filmsdetail-card-info {
   display: inline;
 }
+.c-filmdetail-imgdiv {
+  position: relative;
+}
+.c-filmdetail-imgdiv-watched {
+  position: absolute;
+  bottom: 0;
+  padding: 5px;
+  border-radius: 0 5px 0 0;
+  opacity: 0.6;
+  background-color: white;
+}
 .c-filmdetail-title {
   margin-top: 15px;
 }
@@ -25,6 +36,7 @@
 }
 .c-filmdetail-info-div {
   display: flex;
+  align-items: center;
   margin: 12px 0;
 }
 .c-filmdetail-star {

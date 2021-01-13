@@ -1,31 +1,28 @@
 <main class="c-filmdetail">
     <div class="row c-app-row" id="c-film">
-     <div class="col-sm-12 col-md-5 col-lg-4">
-        <img src="<%= rootPath() %>assets/images/Poster.jpg" class="d-block w-100" alt="poster" />
+     <div class="col-sm-12 col-md-5 col-lg-3 c-filmdetail-imgdiv">
+        <div class="c-filmdetail-imgdiv-watched">watched</div>
+        <img src="https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/89058/93685/Joker-2019-Final-Style-steps-Poster-buy-original-movie-posters-at-starstills__62518.1572351179.jpg?c=2?imbypass=on" class="d-block w-100" alt="poster" id="c-poster" />
      </div>
-     <div class="col-sm-12 col-md-7 col-lg-8 c-detail-info-div text-light">
+     <div class="col-sm-12 col-md-7 col-lg-9 c-detail-info-div text-light">
         <div class="c-filmsdetail-card-body">
             <div class="c-filmsdetail-card">
-            <h2 class="c-filmdetail-title">Avengers</h2>
+            <h2 class="c-filmdetail-title" id="c-title">Avengers</h2>
               <p class="card-text">
                 <div class="c-filmsdetail-card-info">
-                    <span class="c-filmdetail-info-top">2018</span> <span class="c-filmdetail-info-top">127min</span> <span class="c-filmdetail-info-top">Actie,Avontuur</span>
+                    <span class="c-filmdetail-info-top" id="c-date">2018</span> <span class="c-filmdetail-info-top" id="c-duur">127min</span> <span class="c-filmdetail-info-top" id="c-genre">Actie,Avontuur</span>
                 </div>
               </p>
               <p class="card-text c-filmdetail-info-div">
-                <img src="<%= rootPath() %>assets/images/star-full.svg" class="c-filmdetail-star" alt="..." />
-                <img src="<%= rootPath() %>assets/images/star-full.svg" class="c-filmdetail-star" alt="..." />
-                <img src="<%= rootPath() %>assets/images/star-full.svg" class="c-filmdetail-star" alt="..." />
-                <img src="<%= rootPath() %>assets/images/star-full.svg" class="c-filmdetail-star" alt="..." />
-                <img src="<%= rootPath() %>assets/images/star-empty.svg" class="c-filmdetail-star" alt="..." />
-                <span class="c-filmsdetail-score">8/10</span>
+                <span id="c-stars"></span>
+                <span class="c-filmsdetail-score" id="c-score">8/10</span>
               </p>
               
-              <p class="card-text">
+              <p class="card-text" id="c-discription">
                 After Thanos, an intergalactic warlord, disintegrates half of the universe, the Avengers must reunite and assemble again to reinvigorate their trounced allies and restore balance.
               </p>
               <p class="card-text c-filmsdetail-card-info" >
-                <span class="c-filmdetail-info-top">Regisseur: Christopher nolan </span>
+                <span class="c-filmdetail-info-top" id="c-director">Regisseur: Christopher nolan </span>
                 <span class=""></span>
               </p>
 

@@ -22,6 +22,7 @@ async function postData() {
     .then((result) => getLoginID(result, username))
     .catch((error) => errorDisplay(error));
 }
+
 const errorDisplay = (error) => {
   const input = document.querySelectorAll('input').forEach((a) => a.classList.add('is-invalid'));
   //const feedback = document.getElementsByClassName('c-login-feedback');
@@ -29,6 +30,7 @@ const errorDisplay = (error) => {
   //feedback.style.display = 'initial';
   input;
 };
+
 const getLoginID = (json, username) => {
   var jsonresult = JSON.parse(json);
   console.log(username);
