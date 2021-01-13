@@ -6,8 +6,8 @@ const dataFilmCard = async (type) => {
   const data = await dataAccess.api.get(url);
   console.log(data);
   let filmString = '';
-  for (const film of data) {
-    const b = new Films(film);
+  for (const genre of data) {
+    const b = new Films(genre);
     filmString += b.render();
   }
   if (!filmString == '') {

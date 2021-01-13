@@ -1,19 +1,15 @@
 <main class="c-app">
-  <div class="row c-bar">
-    <div class="c-bar-dropdown col-1">
-      <button class="btn dropdown-toggle c-bar-button" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">Dropdown</button>
-      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-        <li><button class="dropdown-item" type="button">Action</button></li>
-        <li><button class="dropdown-item" type="button">Another action</button></li>
-        <li><button class="dropdown-item" type="button">Something else here</button></li>
-      </ul>
+  <div class="row c-bar text-light bg-dark">
+    <div class="dropdown c-bar-dropdown col-1">
+      <button class="btn dropdown-toggle c-bar-button text-light" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">Categorieen</button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu2" id="c-categorieen"></ul>
     </div>
     <div class="col-3 row">
-      <div class="col-9">
-        <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline" />
+      <div class="col-9 c-bar-input">
+        <input type="text" id="search" class="form-control" />
       </div>
       <div class="col-3">
-        <label for="inputPassword6" class="col-form-label">Search</label>
+        <label for="search" class="col-form-label" id="searchknop">Search</label>
       </div>
     </div>
   </div>

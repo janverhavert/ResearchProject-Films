@@ -1,9 +1,10 @@
 .c-bar {
+  border-top: 1px solid black;
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  background-color: rgb(65, 65, 65);
+  //background-color: rgb(65, 65, 65);
   padding: 0 24px;
   margin: 0;
   height: 50px;
@@ -16,4 +17,7 @@
   align-items: center;
   background-color: transparent;
   margin: 0;
+}
+.c-bar-input {
+  padding: 0;
 }

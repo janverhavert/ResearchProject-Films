@@ -1,5 +1,6 @@
 require('expose-loader?$!expose-loader?jQuery!jquery');
-require('bootstrap/dist/js/bootstrap.bundle.js');
+require('@popperjs/core/dist/esm/popper.js');
+require('bootstrap/dist/js/bootstrap.bundle.min.js');
 require('@fortawesome/fontawesome-free/js/all.js');
 require('babel-core/register');
 require('babel-polyfill');
@@ -7,13 +8,14 @@ require('babel-polyfill');
 import dataFilmCard from './lib/dataFilmCard';
 import dataFilmDetail from './lib/dataFilmDetail';
 import dataWatched from './lib/dataWatched';
+import bar from './lib/bar';
 import login from './lib/login';
 import profiel from './lib/profiel';
 import header from './lib/header';
 
 document.addEventListener('DOMContentLoaded', async function () {
   header();
-
+  bar();
   if (window.location.href == 'http://127.0.0.1:3000/') {
     document.querySelector('#c-filmheader').className = 'nav-link active';
     dataFilmCard('Films');

@@ -20,9 +20,15 @@ async function postData() {
   fetch('http://localhost:63436/api/auth/login', requestOptions)
     .then((response) => response.text())
     .then((result) => getLoginID(result, username))
-    .catch((error) => console.log('error', error));
+    .catch((error) => errorDisplay(error));
 }
-
+const errorDisplay = (error) => {
+  const input = document.querySelectorAll('input').forEach((a) => a.classList.add('is-invalid'));
+  //const feedback = document.getElementsByClassName('c-login-feedback');
+  document.querySelectorAll('.c-login-feedback').forEach((a) => (a.style.display = 'initial'));
+  //feedback.style.display = 'initial';
+  input;
+};
 const getLoginID = (json, username) => {
   var jsonresult = JSON.parse(json);
   console.log(username);
