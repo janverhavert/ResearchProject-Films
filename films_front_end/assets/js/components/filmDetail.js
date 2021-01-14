@@ -2,6 +2,14 @@ import starSystem from '../lib/starSystem';
 
 const filmDetail = (data) => {
   document.querySelector('#c-title').innerHTML = data.titel;
+  if (data.watched == true) {
+    document.querySelector('.js-watched').innerHTML = 'Watched';
+    document.querySelector('.js-watched').id = 'Watched';
+  } else if (data.watched == false) {
+    document.querySelector('.js-watched').innerHTML = 'Not watched';
+    document.querySelector('.js-watched').id = 'notWatched';
+  }
+
   document.querySelector('#c-date').innerHTML = data.releaseDatum.toString().split('T')[0];
   document.querySelector('#c-duur').innerHTML = data.duur + ' min';
   document.querySelector('#c-genre').innerHTML = data.genres[0].genreNaam + '/' + data.genres[1].genreNaam;

@@ -1,6 +1,6 @@
 require('expose-loader?$!expose-loader?jQuery!jquery');
-require('@popperjs/core/dist/cjs/popper');
-require('bootstrap/dist/js/bootstrap.bundle.min.js');
+//require('@popperjs/core/dist/cjs/popper');
+//require('bootstrap/dist/js/bootstrap.bundle.min.js');
 require('@fortawesome/fontawesome-free/js/all.js');
 require('babel-core/register');
 require('babel-polyfill');
