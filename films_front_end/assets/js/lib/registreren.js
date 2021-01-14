@@ -25,6 +25,7 @@ async function postData() {
       .catch((error) => errorDisplay(error));
   } else {
     errorDisplay('wachtwoorden zijn niet gelijk');
+    document.getElementById('c-feedback').innerHTML = 'wachtwoorden zijn niet gelijk';
   }
 
   // Default options are marked with *
