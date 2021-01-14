@@ -10,6 +10,7 @@ import dataFilmDetail from './lib/dataFilmDetail';
 import dataWatched from './lib/dataWatched';
 import bar from './lib/bar';
 import login from './lib/login';
+import registreren from './lib/registreren';
 import profiel from './lib/profiel';
 import header from './lib/header';
 
@@ -37,6 +38,10 @@ document.addEventListener('DOMContentLoaded', async function () {
   } else if (window.location.href.includes('http://127.0.0.1:3000/login')) {
     document.getElementById('login').onclick = function () {
       login();
+    };
+  } else if (window.location.href.includes('http://127.0.0.1:3000/registreren')) {
+    document.getElementById('registreren').onclick = function () {
+      registreren();
     };
   }
 });
