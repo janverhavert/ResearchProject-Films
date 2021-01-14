@@ -30,5 +30,13 @@ namespace Film_Api.Repositories
             await context.Watched.InsertOneAsync(watched);
             return watched;
         }
+        public async Task<string> RemoveAsync(string id)
+        {
+            ObjectId bsonId = (!ObjectId.TryParse(id, out bsonId)) ? ObjectId.Empty : ObjectId.Parse(id);
+            Guid userId = (!Guid.TryParse(id, out userId)) ? Guid.Empty : Guid.Parse(id);
+
+            await context.Watched.DeleteOneAsync(r => r.UserId == userId || r.Id == bsonId);
+            return id;
+        }
     }
 }

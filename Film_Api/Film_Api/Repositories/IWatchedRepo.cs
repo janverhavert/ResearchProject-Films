@@ -8,5 +8,6 @@ namespace Film_Api.Repositories
     {
         Task<IEnumerable<Watched>> GetWatchedByUserId(string id);
         Task<Watched> CreateAsync(Watched watched);
+        Task<string> RemoveAsync(string id);
     }
 }

@@ -209,6 +209,7 @@ namespace Film_Api.Controllers
             return Ok(film);
         }
         [HttpPost()]
+
         public async Task<ActionResult<Film>> PostFilm([FromBody] Film film)
         {
             if (film == null)
@@ -225,6 +226,56 @@ namespace Film_Api.Controllers
             {
                 await filmRepo.CreateAsync(film);
                 return CreatedAtAction("GetFilm", new { id = film.FilmId }, film);
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+
+        }
+        [HttpPost()]
+        [Route("/api/User/Reviews")]
+        public async Task<ActionResult<Review>> PostReview([FromBody] Review review)
+        {
+            if (review == null)
+            {
+                return BadRequest(new { Message = "Geen film input" });
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                await reviewRepo.CreateAsync(review);
+                return CreatedAtAction("GetReview", new { id = review.FilmId }, review);
+            }
+            catch (Exception exc)
+            {
+                throw exc;
+            }
+
+        }
+        [HttpPost()]
+        [Route("/api/Watched")]
+        public async Task<ActionResult<Watched>> PostWatched([FromBody] Watched watched)
+        {
+            if (watched == null)
+            {
+                return BadRequest(new { Message = "Geen watched input" });
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                await watchedRepo.CreateAsync(watched);
+                return CreatedAtAction("GetWatchedByUserId", new { id = watched.FilmId }, watched);
             }
             catch (Exception exc)
             {
@@ -297,6 +348,23 @@ namespace Film_Api.Controllers
             }
 
             var film = await filmRepo.RemoveAsync(id);
+
+            if (film == null)
+            {
+                return NotFound();
+            }
+            return Ok(film);
+        }
+        [HttpDelete]
+        [Route("/api/Watched/{id}")]
+        public async Task<ActionResult> DeleteWatched(string id)
+        {
+            if (id == null || id == "")
+            {
+                return BadRequest();
+            }
+
+            var film = await watchedRepo.RemoveAsync(id);
 
             if (film == null)
             {

@@ -81,6 +81,72 @@ namespace IdentityServices.Controllers
             }
             return BadRequest(returnMessage); //zo weinig mogelijk (hacker) info
         }
+        [HttpPost]
+        [Route("register")]
+        [AllowAnonymous]
+        // [ValidateAntiForgeryToken]
+        //CSRF: enkel nodig indien (statefull) via een browser , form ingelogd wordt
+        public async Task<IActionResult> Register([FromBody] LoginDTO loginDTO)
+        // , [FromQuery(Name = "d")] string destination = "frontend")
+        {
+            var returnMessage = "";
+            //LoginViewModel met (Required) UserName en Password aanbrengen. 
+            if (!ModelState.IsValid)
+                return BadRequest("Onvolledige gegevens");
+            try
+            {
+                //geen persistence, geen lockout -> via false, false 
+                Models.User newUser = new Models.User { Email = loginDTO.Email, UserName = loginDTO.UserName };
+                var result = await userManager.CreateAsync(newUser, loginDTO.Password);
+
+                //optioneel: cardnumber controle
+                if (result.Succeeded)
+                {
+                    try
+                    {
+                        //password controle gebeurt ook in de JWTService
+                        //extra checks zijn mogelijk . bvb op basis vd rol en een querystring item
+                        var jwtsvc = new JWTServices<User>(configuration, logger, userManager, hasher);
+                        var token = await jwtsvc.GenerateJwtToken(loginDTO);
+                        return Ok(token);  // HET TOKEN returnen
+                    }
+                    catch (Exception exc)
+                    {
+                        logger.LogError($"Exception thrown when creating JWT: {exc}");
+                    }
+                }
+                throw new Exception("Aanmaken van nieuwe user is niet gelukt.");
+                //zo algemeen mogelijke boodschap. Vertel niet dat het pwd niet juist is.
+            }
+            catch (Exception exc)
+            {
+                returnMessage = $"Foutief of ongeldig request: {exc.Message}";
+                ModelState.AddModelError("", returnMessage);
+                Debug.WriteLine(exc.Message);
+            }
+            return BadRequest(returnMessage); //zo weinig mogelijk (hacker) info
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddUserToRole(RolesForUser_VM rolesForUserVM)
+        {
+            var user = await userManager.FindByIdAsync(rolesForUserVM.UserId);
+            var role = await roleManager.FindByIdAsync(rolesForUserVM.RoleId);
+
+            var result = await userManager.AddToRoleAsync(user, role.NormalizedName);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("IndexRoles", roleManager.Roles);
+            }
+
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            return Ok(rolesForUserVM);
+        }
 
         [HttpGet("validate")]
         [Route("loginData")]
