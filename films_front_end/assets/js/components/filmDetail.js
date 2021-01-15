@@ -21,7 +21,7 @@ const filmDetail = (data) => {
   }
 
   document.querySelector('#c-discription').innerHTML = data.discription;
-  document.querySelector('#c-director').innerHTML = data.director;
+  document.querySelector('#c-director').innerHTML = 'Regisseur: ' + data.director;
 };
 // function Film({ filmId, titel, director, discription, duur, genres, releaseDatum, avg, reviews }) {
 //   Object.assign(this, { filmId, titel, director, discription, duur, genres, releaseDatum, avg, reviews });
