@@ -13,6 +13,8 @@ import login from './lib/login';
 import registreren from './lib/registreren';
 import profiel from './lib/profiel';
 import header from './lib/header';
+import admin from './lib/admin';
+import adminReviews from './lib/adminReviews';
 
 document.addEventListener('DOMContentLoaded', async function () {
   header();
@@ -35,6 +37,10 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
   } else if (window.location.href.includes('http://127.0.0.1:3000/film')) {
     dataFilmDetail();
+  } else if (window.location.href.includes('http://127.0.0.1:3000/adminReviews')) {
+    adminReviews();
+  } else if (window.location.href.includes('http://127.0.0.1:3000/admin')) {
+    admin();
   } else if (window.location.href.includes('http://127.0.0.1:3000/login')) {
     document.getElementById('login').onclick = function () {
       login();

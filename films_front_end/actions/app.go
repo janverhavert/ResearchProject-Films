@@ -59,6 +59,8 @@ func App() *buffalo.App {
 		app.GET("/film/{id}", FilmDetailHandler)
 		app.GET("/profiel", ProfielHandler)
 		app.GET("/admin", AdminHandler)
+		app.GET("/adminAdd", AdminHandler)
+		app.GET("/adminReviews/{id}", AdminReviewsHandler)
 
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
