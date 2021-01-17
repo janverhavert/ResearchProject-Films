@@ -28,6 +28,15 @@ namespace Film_Api.Controllers
             this.reviewRepo = reviewRepo;
             this.genreRepo = genreRepo;
         }
+
+        [HttpGet]
+        [Route("/api/All")]
+        public async Task<ActionResult<IEnumerable<Film>>> GetAll()
+        {
+            var films = await filmRepo.GetAll();
+            return Ok(films);
+        }
+
         [HttpGet]
         [Route("/api/Films")]
         public async Task<ActionResult<IEnumerable<Film>>> GetFilms()
@@ -209,7 +218,7 @@ namespace Film_Api.Controllers
             return Ok(film);
         }
         [HttpPost()]
-
+        [Route("/api/Add")]
         public async Task<ActionResult<Film>> PostFilm([FromBody] Film film)
         {
             if (film == null)
@@ -285,24 +294,20 @@ namespace Film_Api.Controllers
         }
 
         [HttpPut("{filmId}")]
-        public async Task<IActionResult> PutRestaurant(string filmId, Film film)
+        [Route("/api/Edit")]
+        public async Task<IActionResult> PutRestaurant([FromBody] Film film)
         {
             //1. checks : null , ids, exists, valid
             // correcte JsonPropertyNames en datatype 
-            if (film == null || filmId == null) return BadRequest();
+            if (film == null) return BadRequest();
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (Guid.Parse(filmId) != film.FilmId)
-            {
-                return BadRequest();
-            }
-
             //Film ophalen (op ObjecId of FilmId)
-            if (filmRepo.GetFilmById(filmId) == null)
+            if (filmRepo.GetFilmById(Convert.ToString(film.FilmId)) == null)
             {
                 return NotFound("Film bestaat niet.");
             }
@@ -340,6 +345,7 @@ namespace Film_Api.Controllers
 
         // DELETE api/<FilmsController>/5
         [HttpDelete]
+        [Route("/api/Films/{id}")]
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null || id == "")
@@ -365,6 +371,24 @@ namespace Film_Api.Controllers
             }
 
             var film = await watchedRepo.RemoveAsync(id);
+
+            if (film == null)
+            {
+                return NotFound();
+            }
+            return Ok(film);
+        }
+
+        [HttpDelete]
+        [Route("/api/Reviews/{id}")]
+        public async Task<ActionResult> DeleteReview(string id)
+        {
+            if (id == null || id == "")
+            {
+                return BadRequest();
+            }
+
+            var film = await reviewRepo.RemoveAsync(id);
 
             if (film == null)
             {

@@ -9,5 +9,7 @@ namespace Film_Api.Repositories
         Task<Review> CreateAsync(Review review);
 
         Task<IEnumerable<Review>> GetReviewByUserId(string id);
+
+        Task<string> RemoveAsync(string id);
     }
 }

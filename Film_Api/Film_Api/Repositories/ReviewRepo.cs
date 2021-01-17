@@ -31,5 +31,14 @@ namespace Film_Api.Repositories
             await context.Reviews.InsertOneAsync(review);
             return review;
         }
+
+        public async Task<string> RemoveAsync(string id)
+        {
+            ObjectId bsonId = (!ObjectId.TryParse(id, out bsonId)) ? ObjectId.Empty : ObjectId.Parse(id);
+            Guid filmId = (!Guid.TryParse(id, out filmId)) ? Guid.Empty : Guid.Parse(id);
+
+            await context.Reviews.DeleteOneAsync(r => r.FilmId == filmId || r.Id == bsonId);
+            return id;
+        }
     }
 }
