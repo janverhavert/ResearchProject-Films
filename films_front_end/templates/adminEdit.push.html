@@ -1,0 +1,76 @@
+<main class="container">
+  <h1 class="text-center text-light">Admin</h1>
+  <div class="card mb-3">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/89058/93685/Joker-2019-Final-Style-steps-Poster-buy-original-movie-posters-at-starstills__62518.1572351179.jpg?c=2?imbypass=on" class="card-img h-100" alt="banner" />
+      </div>
+      <div class="col-md-8">
+        <div class="card-body c-filmsdetail-card-body">
+            <div class="form-row">
+              <div class="form-group col-md-6 col-sm-12">
+                <label htmlFor="FilmNaam">Titel</label>
+                <input type="text" class="form-control" id="FilmNaam"/>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-6 col-sm-12">
+                <label htmlFor="FilmRegisseur">Regisseur</label>
+                <input type="text" class="form-control" id="FilmRegisseur"/>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-4 col-sm-6">
+                <label htmlFor="FilmDatum">Release datum</label>
+                <input type="datetime-local" class="form-control" id="FilmDatum" />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-3 col-sm-6">
+                <label htmlFor="FilmGenre">Genre</label>
+                <select class="form-control" id="FilmGenre">
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-3 col-sm-6">
+                <label htmlFor="FilmType">Film of serie?</label>
+                <select class="form-control" id="FilmType">
+                    <option value="false">Film</option>
+                    <option value="true">Serie</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group col-md-3 col-sm-6">
+                <label htmlFor="FilmDuur">Duratie</label>
+                <input type="text" class="form-control" id="FilmDuur" placeholder="Minuten"  />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-12 col-sm-12">
+                <label htmlFor="FilmDiscription">Discriptie</label>
+
+                <textarea class="form-control" id="FilmDiscription"></textarea>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6 col-sm-12">
+                <input type="file" class="custom-file-input" id="customFile" />
+                <label class="custom-file-label" htmlFor="customFile">
+                  Poster kiezen
+                </label>
+              </div>
+            </div>
+            <button class="btn c-app-buttons-selected c-button-toevoegen" type="submit" id="Edit">
+              Film aanpassen
+            </button>
+        </div>
+      </div>
+    </div>
+</main>

@@ -14,6 +14,8 @@ import registreren from './lib/registreren';
 import profiel from './lib/profiel';
 import header from './lib/header';
 import admin from './lib/admin';
+import adminAdd from './lib/adminAdd';
+import adminEdit from './lib/adminEdit';
 import adminReviews from './lib/adminReviews';
 
 document.addEventListener('DOMContentLoaded', async function () {
@@ -29,6 +31,10 @@ document.addEventListener('DOMContentLoaded', async function () {
   } else if (window.location.href == 'http://127.0.0.1:3000/watched') {
     document.querySelector('#c-watch').className = 'nav-link active';
     dataWatched('Watched');
+  } else if (window.location.href == 'http://127.0.0.1:3000/adminAdd') {
+    adminAdd();
+  } else if (window.location.href.includes('http://127.0.0.1:3000/adminEdit')) {
+    adminEdit();
   } else if (window.location.href == 'http://127.0.0.1:3000/profiel') {
     if (localStorage.getItem('UserRole') == 'Admin' || localStorage.getItem('UserRole') == 'Customer') {
       profiel();

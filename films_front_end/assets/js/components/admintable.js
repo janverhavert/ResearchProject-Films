@@ -16,9 +16,11 @@ AdminTable.prototype.render = function () {
           Reviews
         </button>
         </a>
+        <a href="/adminEdit/${this.filmId}">
         <button class="btn btn-primary c-table-button c-app-buttons-selected " type="button">
           Edit
         </button>
+        </a>
       <button class="btn btn-primary c-table-button  c-app-buttons-selected js-delete" type="button" id="${this.filmId}">
         Delete
       </button>
