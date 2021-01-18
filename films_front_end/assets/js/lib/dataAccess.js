@@ -1,6 +1,6 @@
 const api = (function () {
   const get = (endpoint) => {
-    return fetch('https://localhost:44313/api/' + endpoint).then((resp) => resp.json());
+    return fetch('http://127.0.0.1:3000/api/' + endpoint).then((resp) => resp.json());
   };
   return {
     get: get,

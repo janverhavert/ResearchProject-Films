@@ -8,9 +8,9 @@ const dataFilmCard = async (type) => {
 
   let filmString = '';
   for (const watched of data) {
-    let filmId = watched.filmId;
+    let filmId = watched.FilmId;
     console.log(filmId);
-    let api = `film/${filmId}`;
+    let api = `Film/${filmId}`;
     const film = await dataAccess.api.get(api);
     console.log(film);
     const b = new Films(film);

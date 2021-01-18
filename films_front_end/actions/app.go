@@ -63,6 +63,18 @@ func App() *buffalo.App {
 		app.GET("/adminEdit/{id}", AdminEditHandler)
 		app.GET("/adminReviews/{id}", AdminReviewsHandler)
 
+		//api
+		app.GET("/api/All", getAllHandler)
+		app.GET("/api/Films", getFilmsHandler)
+		app.GET("/api/Film/{id}", getFilmbyIdHandler)
+		app.GET("/api/Films/genre/{id}", getGenreByFilmHandler)
+		app.GET("/api/Films/{name}", getFilmbyNameHandler)
+		app.GET("/api/films/Reviews/{id}", getFilmReviewsHandler)
+		app.GET("/api/user/reviews/{id}", getUserReviewsHandler)
+		app.GET("/api/Watched/{id}", getWatchedHandler)
+		app.GET("/api/Series", getSeriesHandler)
+		app.GET("/api/Genres", getGenresHandler)
+
 		app.ServeFiles("/", assetsBox) // serve files from the public directory
 	}
 

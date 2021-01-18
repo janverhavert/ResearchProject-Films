@@ -1,10 +1,10 @@
-function Genres({ genreId, genreNaam }) {
-  Object.assign(this, { genreId, genreNaam });
+function Genres({ genreId, genreName }) {
+  Object.assign(this, { genreId, genreName });
 }
 
 Genres.prototype.render = function () {
   return `
-    <option value=${this.genreId}>${this.genreNaam}</option>
+    <option value=${this.genreId}>${this.genreName}</option>
       `;
 };
 

@@ -5,20 +5,20 @@ import dataAccess from '../lib/dataAccess';
 const dataFilmDetail = async () => {
   var url = window.location.pathname;
   var id = url.substring(url.lastIndexOf('/') + 1);
-  let api = `film/${id}`;
+  let api = `Film/${id}`;
   let apiReviews = `films/Reviews/${id}`;
 
   let apiWatched = `Watched/${localStorage.getItem('UserId')}`;
-  const dataReviews = await dataAccess.api.get(apiReviews);
   const data = await dataAccess.api.get(api);
+  console.log(data);
+  const dataReviews = await dataAccess.api.get(apiReviews);
 
   if (localStorage.getItem('UserId')) {
     const dataWatched = await dataAccess.api.get(apiWatched);
     document.querySelector('#c-review-form').innerHTML = reviewForm();
     data['watched'] = false;
     for (const watchedlist of dataWatched) {
-      console.log(watchedlist);
-      if (watchedlist.userId == localStorage.getItem('UserId')) {
+      if (watchedlist.filmId == id) {
         data['watched'] = true;
         break;
       }
@@ -27,7 +27,8 @@ const dataFilmDetail = async () => {
 
   var sum = 0;
   for (var i = 0; i < dataReviews.length; i++) {
-    (sum += dataReviews[i].score), 10; //don't forget to add the base
+    console.log(dataReviews[i].Score);
+    (sum += dataReviews[i].Score), 10; //don't forget to add the base
   }
   var avg = sum / dataReviews.length;
   data['avg'] = Math.round(avg * 10) / 10;

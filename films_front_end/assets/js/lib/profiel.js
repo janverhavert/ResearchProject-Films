@@ -6,9 +6,10 @@ const profiel = async () => {
   console.log(data);
   let reviewsString = '';
   for (const review of data) {
-    let filmId = review.filmId;
-    let api = `film/${filmId}`;
+    let filmId = review.FilmId;
+    let api = `Film/${filmId}`;
     const data = await dataAccess.api.get(api);
+    console.log(data);
     review['filmTitel'] = data.titel;
     const b = new UserReviews(review);
     reviewsString += b.render();
