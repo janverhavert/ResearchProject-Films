@@ -14,7 +14,7 @@ import (
 
 // HomeHandler is a default handler to serve up
 // a home page.
-func getFilmsHandler(c buffalo.Context) error {
+func getSeriesHandler(c buffalo.Context) error {
 	collection := helper.ConnectDBFilms()
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 
@@ -22,7 +22,7 @@ func getFilmsHandler(c buffalo.Context) error {
 	var films []models.Film
 
 	// bson.M{},  we passed empty filter. So we want to get all data.
-	cur, err := collection.Find(context.TODO(), bson.M{"Serie": false})
+	cur, err := collection.Find(context.TODO(), bson.M{"serie": true})
 
 	if err != nil {
 		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": "error!"}))

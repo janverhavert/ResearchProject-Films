@@ -10,6 +10,7 @@ require (
 	github.com/gobuffalo/mw-i18n v1.1.0
 	github.com/gobuffalo/mw-paramlogger v1.0.0
 	github.com/gobuffalo/packr/v2 v2.8.1
+	github.com/google/uuid v1.1.5
 	github.com/gorilla/mux v1.7.4
 	github.com/shopspring/decimal v0.0.0-20180709203117-cd690d0c9e24
 	github.com/unrolled/secure v1.0.8

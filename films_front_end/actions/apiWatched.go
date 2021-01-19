@@ -9,21 +9,23 @@ import (
 	"films_front_end/back-end/models"
 
 	"github.com/gobuffalo/buffalo"
+	"github.com/gorilla/mux"
 	"go.mongodb.org/mongo-driver/bson"
 )
 
 // HomeHandler is a default handler to serve up
 // a home page.
-func getSeriesHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBFilms()
+func getWatchedHandler(c buffalo.Context) error {
+	collection := helper.ConnectDBWatched()
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
+	var params = mux.Vars(c.Request())
 
+	//Get id from parameters
+	id, _ := params["id"]
 	// we created Book array
-	var films []models.Film
-
+	var films []models.Watched
 	// bson.M{},  we passed empty filter. So we want to get all data.
-	cur, err := collection.Find(context.TODO(), bson.M{"Serie": true})
-
+	cur, err := collection.Find(context.TODO(), bson.M{"userId": id})
 	if err != nil {
 		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": "error!"}))
 	}
@@ -36,7 +38,7 @@ func getSeriesHandler(c buffalo.Context) error {
 	for cur.Next(context.TODO()) {
 
 		// create a value into which the single document can be decoded
-		var film models.Film
+		var film models.Watched
 		// & character returns the memory address of the following variable.
 		err := cur.Decode(&film) // decode similar to deserialize process.
 		if err != nil {

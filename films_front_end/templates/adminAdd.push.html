@@ -10,36 +10,36 @@
             <div class="form-row">
               <div class="form-group col-md-6 col-sm-12">
                 <label htmlFor="FilmNaam">Titel</label>
-                <input type="text" class="form-control" id="FilmNaam"/>
+                <input type="text" class="form-control" id="FilmNaam" required/>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-6 col-sm-12">
                 <label htmlFor="FilmRegisseur">Regisseur</label>
-                <input type="text" class="form-control" id="FilmRegisseur"/>
+                <input type="text" class="form-control" id="FilmRegisseur" required/>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-4 col-sm-6">
                 <label htmlFor="FilmDatum">Release datum</label>
-                <input type="datetime-local" class="form-control" id="FilmDatum" />
+                <input type="datetime-local" class="form-control" id="FilmDatum" required/>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-3 col-sm-6">
                 <label htmlFor="FilmGenre">Genre</label>
-                <select class="form-control" id="FilmGenre">
+                <select class="form-control" id="FilmGenre" required>
                 </select>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-3 col-sm-6">
-                <label htmlFor="FilmType">Film of serie?</label>
-                <select class="form-control" id="FilmType">
+                <label htmlFor="FilmType">Film of serie?</label >
+                <select class="form-control" id="FilmType" required>
                     <option value="false">Film</option>
                     <option value="true">Serie</option>
                 </select>
@@ -49,14 +49,14 @@
             <div class="form-row">
               <div class="form-group col-md-3 col-sm-6">
                 <label htmlFor="FilmDuur">Duratie</label>
-                <input type="text" class="form-control" id="FilmDuur" placeholder="Minuten"  />
+                <input type="text" class="form-control" id="FilmDuur" placeholder="Minuten"  required/>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group col-md-12 col-sm-12">
                 <label htmlFor="FilmDiscription">Discriptie</label>
 
-                <textarea class="form-control" id="FilmDiscription"></textarea>
+                <textarea class="form-control" id="FilmDiscription" required></textarea>
               </div>
             </div>
             <div class="form-row">
@@ -65,9 +65,10 @@
                 <label class="custom-file-label" htmlFor="customFile">
                   Poster kiezen
                 </label>
+                <p class="c-login-feedback" id="c-feedback">gelieve alle velden in te vullen</p>
               </div>
             </div>
-            <button class="btn c-app-buttons-selected c-button-toevoegen" type="submit" id="Add">
+            <button class="btn c-app-buttons-selected c-button-toevoegen" type="submit" id="POST">
               Film toevoegen
             </button>
         </div>

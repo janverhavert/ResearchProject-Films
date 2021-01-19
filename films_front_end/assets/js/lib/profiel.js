@@ -6,7 +6,7 @@ const profiel = async () => {
   console.log(data);
   let reviewsString = '';
   for (const review of data) {
-    let filmId = review.FilmId;
+    let filmId = review.filmId;
     let api = `Film/${filmId}`;
     const data = await dataAccess.api.get(api);
     console.log(data);

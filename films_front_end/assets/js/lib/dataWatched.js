@@ -2,13 +2,13 @@ import Films from '../components/filmCard';
 import dataAccess from '../lib/dataAccess';
 const dataFilmCard = async (type) => {
   let url = type + '/' + localStorage.getItem('UserId');
-
+  console.log(url);
   const data = await dataAccess.api.get(url);
   console.log(data);
 
   let filmString = '';
   for (const watched of data) {
-    let filmId = watched.FilmId;
+    let filmId = watched.filmId;
     console.log(filmId);
     let api = `Film/${filmId}`;
     const film = await dataAccess.api.get(api);

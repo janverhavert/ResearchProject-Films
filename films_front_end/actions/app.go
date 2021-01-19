@@ -3,13 +3,12 @@ package actions
 import (
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/envy"
-	forcessl "github.com/gobuffalo/mw-forcessl"
-	paramlogger "github.com/gobuffalo/mw-paramlogger"
-	"github.com/unrolled/secure"
-
 	csrf "github.com/gobuffalo/mw-csrf"
+	forcessl "github.com/gobuffalo/mw-forcessl"
 	i18n "github.com/gobuffalo/mw-i18n"
+	paramlogger "github.com/gobuffalo/mw-paramlogger"
 	"github.com/gobuffalo/packr/v2"
+	"github.com/unrolled/secure"
 )
 
 // ENV is used to help switch settings based on where the
@@ -40,7 +39,6 @@ func App() *buffalo.App {
 
 		// Automatically redirect to SSL
 		app.Use(forceSSL())
-
 		// Log request parameters (filters apply).
 		app.Use(paramlogger.ParameterLogger)
 
@@ -66,11 +64,16 @@ func App() *buffalo.App {
 		//api
 		app.GET("/api/All", getAllHandler)
 		app.GET("/api/Films", getFilmsHandler)
+		app.DELETE("/api/Films/{id}", deleteFilmHandler)
+		app.POST("/api/Film", createFilmHandler)
+		app.PUT("/api/Film", updateFilmHandler)
 		app.GET("/api/Film/{id}", getFilmbyIdHandler)
 		app.GET("/api/Films/genre/{id}", getGenreByFilmHandler)
 		app.GET("/api/Films/{name}", getFilmbyNameHandler)
 		app.GET("/api/films/Reviews/{id}", getFilmReviewsHandler)
 		app.GET("/api/user/reviews/{id}", getUserReviewsHandler)
+		app.DELETE("/api/Reviews/{id}", deleteReviewHandler)
+		app.POST("/api/User/Reviews", createReviewHandler)
 		app.GET("/api/Watched/{id}", getWatchedHandler)
 		app.GET("/api/Series", getSeriesHandler)
 		app.GET("/api/Genres", getGenresHandler)

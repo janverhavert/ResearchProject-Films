@@ -11,8 +11,12 @@ const adminDelete = () => {
     console.log(buttons[i].id);
     buttons[i].onclick = function () {
       console.log(buttons[i].id);
-      fetch(`https://localhost:44313/api/Reviews/${buttons[i].id}`, {
+      var myHeaders = new Headers();
+      //myHeaders.append('Content-Type', 'application/json');
+      myHeaders.append('X-CSRF-Token', document.getElementsByName('csrf-token')[0].content);
+      fetch(`http://127.0.0.1:3000/api/Reviews/${buttons[i].id}`, {
         method: 'DELETE',
+        headers: myHeaders,
       })
         .then((response) => window.alert('Review is verwijderd'))
         .then(location.reload());
