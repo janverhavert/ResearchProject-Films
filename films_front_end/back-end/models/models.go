@@ -25,14 +25,14 @@ type Genres struct {
 	GenreName string             `json:"genreName,omitempty" bson:"genreName,omitempty"`
 }
 type Reviews struct {
-	Id             primitive.ObjectID   `json:"_id,omitempty" bson:"_id,omitempty"`
-	UserId         string               `json:"userId,omitempty" bson:"userId,omitempty"`
-	FilmId         string               `json:"filmId,omitempty" bson:"filmId,omitempty"`
-	Titel          string               `json:"titel" bson:"titel,omitempty"`
-	Score          primitive.Decimal128 `json:"score" bson:"score,omitempty"`
-	UserName       string               `json:"userName" bson:"userName,omitempty"`
-	DateOfCreation time.Time            `json:"dateOfCreation" bson:"dateOfCreation,omitempty"`
-	Discription    string               `json:"discription" bson:"discription,omitempty"`
+	Id             primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`
+	UserId         string             `json:"userId,omitempty" bson:"userId,omitempty"`
+	FilmId         string             `json:"filmId,omitempty" bson:"filmId,omitempty"`
+	Titel          string             `json:"titel" bson:"titel,omitempty"`
+	Score          float32            `json:"score" bson:"score,omitempty"`
+	UserName       string             `json:"userName" bson:"userName,omitempty"`
+	DateOfCreation time.Time          `json:"dateOfCreation" bson:"dateOfCreation,omitempty"`
+	Discription    string             `json:"discription" bson:"discription,omitempty"`
 }
 type Watched struct {
 	Id             primitive.ObjectID `json:"_id,omitempty" bson:"_id,omitempty"`

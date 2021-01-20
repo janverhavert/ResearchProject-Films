@@ -21,7 +21,6 @@ func getFilmsHandler(c buffalo.Context) error {
 
 	// we created Book array
 	var films []models.Film
-
 	// bson.M{},  we passed empty filter. So we want to get all data.
 	cur, err := collection.Find(context.TODO(), bson.M{"serie": false})
 
@@ -68,7 +67,7 @@ func getFilmbyNameHandler(c buffalo.Context) error {
 	var films []models.Film
 	fmt.Println(name)
 	// bson.M{},  we passed empty filter. So we want to get all data.
-	cur, err := collection.Find(context.TODO(), bson.M{"titel": name})
+	cur, err := collection.Find(context.TODO(), bson.M{"$titel": bson.M{"$in": name}, "serie": false})
 	if err != nil {
 		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": "error!"}))
 	}

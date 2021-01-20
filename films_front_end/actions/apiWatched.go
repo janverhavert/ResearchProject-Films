@@ -2,8 +2,11 @@ package actions
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"films_front_end/back-end/helper"
 	"films_front_end/back-end/models"
@@ -54,7 +57,58 @@ func getWatchedHandler(c buffalo.Context) error {
 	if err := cur.Err(); err != nil {
 		log.Fatal(err)
 	}
-	return c.Render(http.StatusOK, r.JSON(films))
+	if len(films) == 0 {
+		return c.Render(http.StatusOK, r.JSON("[]"))
+	} else {
+		return c.Render(http.StatusOK, r.JSON(films))
+	}
+
+	//json.NewEncoder(http.ResponseWriter).Encode()
+
+}
+func createWatchedHandler(c buffalo.Context) error {
+	collection := helper.ConnectDBWatched()
+	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
+	var review models.Reviews
+
+	review.DateOfCreation = time.Now()
+	// we decode our body request params
+	_ = json.NewDecoder(c.Request().Body).Decode(&review)
+
+	// insert our book model.
+	result, err := collection.InsertOne(context.TODO(), review)
+
+	if err != nil {
+		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": "error!"}))
+	}
+
+	return c.Render(http.StatusOK, r.JSON(result))
+
+	//json.NewEncoder(http.ResponseWriter).Encode()
+
+}
+func deleteWatchedHandler(c buffalo.Context) error {
+	collection := helper.ConnectDBWatched()
+	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
+	var params = mux.Vars(c.Request())
+
+	//Get id from parameters
+	id, _ := params["id"]
+	filmId, _ := params["filmid"]
+
+	fmt.Println(id)
+	// insert our book model.
+	filter := bson.M{"userId": id, "filmId": filmId}
+	result, err := collection.DeleteOne(context.TODO(), filter)
+	fmt.Println("DeleteOne Result TYPE:", result)
+	if err != nil {
+		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": err.Error()}))
+	}
+	if result.DeletedCount == 0 {
+		fmt.Println("DeleteOne() document not found")
+	}
+	return c.Render(http.StatusOK, r.JSON(result))
+
 	//json.NewEncoder(http.ResponseWriter).Encode()
 
 }

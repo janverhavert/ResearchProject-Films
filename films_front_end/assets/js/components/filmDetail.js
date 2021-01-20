@@ -12,7 +12,7 @@ const filmDetail = (data) => {
 
   document.querySelector('#c-date').innerHTML = data.releaseDatum.toString().split('T')[0];
   document.querySelector('#c-duur').innerHTML = data.duur + ' min';
-  document.querySelector('#c-genre').innerHTML = data.genres[0].genreName + '/' + data.genres[1].genreName;
+  document.querySelector('#c-genre').innerHTML = data.genres[0].genreName;
   document.querySelector('#c-stars').innerHTML = starSystem(data.avg);
   if (data.avg) {
     document.querySelector('#c-score').innerHTML = '&nbsp;- ' + data.avg + '/10';

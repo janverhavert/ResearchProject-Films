@@ -1,9 +1,8 @@
 package main
 
 import (
-	"log"
-
 	"films_front_end/actions"
+	"log"
 )
 
 // main is the starting point for your Buffalo application.
@@ -14,10 +13,10 @@ import (
 // application that is. :)
 func main() {
 	app := actions.App()
-
 	if err := app.Serve(); err != nil {
 		log.Fatal(err)
 	}
+
 }
 
 /*
