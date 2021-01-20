@@ -1,5 +1,5 @@
-function AdminTable({ filmId, titel, serie, releaseDatum }) {
-  Object.assign(this, { filmId, titel, serie, releaseDatum });
+function AdminTable({ filmId, titel, type, releaseDatum }) {
+  Object.assign(this, { filmId, titel, type, releaseDatum });
 }
 
 AdminTable.prototype.render = function () {
@@ -7,7 +7,7 @@ AdminTable.prototype.render = function () {
   <tr>
   <th scope="row">${this.filmId}</th>
   <td>${this.titel}</td>
-  <td>${this.serie ? 'Serie' : 'Film'}</td>
+  <td>${this.type}</td>
   <td>${this.releaseDatum}</td>
   <td>
     <div>

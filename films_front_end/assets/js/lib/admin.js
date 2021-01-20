@@ -27,16 +27,15 @@ const adminDelete = () => {
 
 const getAdminData = async () => {
   const data = await dataAccess.api.get('All');
-  console.log(data);
   let filmString = '';
-  for (const film of data) {
-    const b = new AdminTable(film);
-    filmString += b.render();
-  }
-  if (!filmString == []) {
-    document.querySelector('#c-table').innerHTML = filmString;
-  } else {
+  if (data == '[]') {
     document.querySelector('#c-table').innerHTML = 'geen film gevonden';
+  } else {
+    for (const film of data) {
+      const b = new AdminTable(film);
+      filmString += b.render();
+    }
+    document.querySelector('#c-table').innerHTML = filmString;
   }
 };
 

@@ -11,3 +11,12 @@ import (
 func HomeHandler(c buffalo.Context) error {
 	return c.Render(http.StatusOK, r.HTML("main.html"))
 }
+func WatchedHandler(c buffalo.Context) error {
+	return c.Render(http.StatusOK, r.HTML("watched.html"))
+}
+func SeriesHandler(c buffalo.Context) error {
+	return c.Render(http.StatusOK, r.HTML("series.html"))
+}
+func FilmDetailHandler(c buffalo.Context) error {
+	return c.Render(http.StatusOK, r.HTML("filmDetail.html"))
+}

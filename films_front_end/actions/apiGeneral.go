@@ -141,7 +141,7 @@ func createFilmHandler(c buffalo.Context) error {
 	var film models.Film
 	newId := generateGUID()
 	film.FilmId = newId
-	film.Serie = false
+	film.Type = "movie"
 	film.ReleaseDatum = time.Now()
 	// we decode our body request params
 	_ = json.NewDecoder(c.Request().Body).Decode(&film)
@@ -158,6 +158,25 @@ func createFilmHandler(c buffalo.Context) error {
 	//json.NewEncoder(http.ResponseWriter).Encode()
 
 }
+
+// func uploadFilmPictureHandler(c buffalo.Context) error {
+// 	collection := helper.ConnectDBFile()
+
+// 	file, err := collection.GridFS
+
+// 	if err != nil {
+// 		err = file.Close()
+// 	}
+
+// 	check(err)
+// 	fmt.Printf("%d bytes written\n", n)
+// 	// insert our book model.
+
+// 	return c.Render(http.StatusOK, r.JSON(result))
+
+// 	//json.NewEncoder(http.ResponseWriter).Encode()
+
+// }
 func updateFilmHandler(c buffalo.Context) error {
 	collection := helper.ConnectDBFilms()
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
@@ -180,7 +199,7 @@ func updateFilmHandler(c buffalo.Context) error {
 			{"filmId", film.FilmId},
 			{"titel", film.Titel},
 			{"director", film.Director},
-			{"serie", film.Serie},
+			{"serie", film.Type},
 			{"duur", film.Duur},
 			{"discription", film.Discription},
 			//{"releaseDatum", film.ReleaseDatum},

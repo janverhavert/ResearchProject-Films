@@ -5,14 +5,14 @@ import dataAccess from '../lib/dataAccess';
 const bar = async (type) => {
   const data = await dataAccess.api.get('Genres');
   let filmString = '';
-  for (const film of data) {
-    const b = new Genre(film);
-    filmString += b.render();
-  }
-  if (!filmString == []) {
-    document.querySelector('#c-categorieen').innerHTML = filmString;
+  if (data == '[]') {
+    document.querySelector('#c-categorieen').innerHTML = 'Geen genres gevonden';
   } else {
-    document.querySelector('#c-categorieen').innerHTML = 'geen genre gevonden';
+    for (const film of data) {
+      const b = new Genre(film);
+      filmString += b.render();
+    }
+    document.querySelector('#c-categorieen').innerHTML = filmString;
   }
 
   const input = document.querySelector('input');

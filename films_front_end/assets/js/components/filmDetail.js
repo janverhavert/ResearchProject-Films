@@ -1,6 +1,7 @@
 import starSystem from '../lib/starSystem';
 
 const filmDetail = (data) => {
+  document.querySelector('#c-poster').src = 'http://image.tmdb.org/t/p/w500' + data.posterUrl;
   document.querySelector('#c-title').innerHTML = data.titel;
   if (data.watched == true) {
     document.querySelector('.js-watched').innerHTML = 'Watched';

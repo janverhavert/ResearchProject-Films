@@ -1,6 +1,9 @@
 package actions
 
 import (
+	"math/rand"
+	"time"
+
 	"github.com/gobuffalo/buffalo"
 	"github.com/gobuffalo/envy"
 	csrf "github.com/gobuffalo/mw-csrf"
@@ -36,7 +39,6 @@ func App() *buffalo.App {
 			Env:         ENV,
 			SessionName: "_films_front_end_session",
 		})
-
 		// Automatically redirect to SSL
 		app.Use(forceSSL())
 		// Log request parameters (filters apply).
@@ -48,6 +50,7 @@ func App() *buffalo.App {
 
 		// Setup and use translations:
 		app.Use(translations())
+		//website
 
 		app.GET("/", HomeHandler)
 		app.GET("/series", SeriesHandler)
@@ -85,6 +88,14 @@ func App() *buffalo.App {
 	}
 
 	return app
+}
+func randate() time.Time {
+	min := time.Date(1970, 1, 0, 0, 0, 0, 0, time.UTC).Unix()
+	max := time.Date(2070, 1, 0, 0, 0, 0, 0, time.UTC).Unix()
+	delta := max - min
+
+	sec := rand.Int63n(delta) + min
+	return time.Unix(sec, 0)
 }
 
 // translations will load locale files, set up the translator `actions.T`,

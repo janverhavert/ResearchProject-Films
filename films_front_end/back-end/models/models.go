@@ -13,7 +13,8 @@ type Film struct {
 	Titel        string             `json:"titel" bson:"titel,omitempty"`
 	Director     string             `json:"director" bson:"director,omitempty"`
 	Duur         int                `json:"duur" bson:"duur,omitempty"`
-	Serie        bool               `json:"serie" bson:"serie,omitempty"`
+	Type         string             `json:"type" bson:"type,omitempty"`
+	PosterUrl    string             `json:"posterUrl" bson:"posterUrl,omitempty"`
 	ReleaseDatum time.Time          `json:"releaseDatum" bson:"releaseDatum,omitempty"`
 	Discription  string             `json:"discription" bson:"discription,omitempty"`
 	Genres       []Genres           `json:"genres" bson:"genres,omitempty"`
@@ -40,3 +41,8 @@ type Watched struct {
 	FilmId         string             `json:"filmId,omitempty" bson:"filmId,omitempty"`
 	DateOfCreation time.Time          `json:"dateOfCreation" bson:"dateOfCreation,omitempty"`
 }
+
+// type GridFS struct {
+// 	Files  *Collection
+// 	Chunks *Collection
+// }

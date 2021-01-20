@@ -105,7 +105,7 @@ func deleteWatchedHandler(c buffalo.Context) error {
 		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": err.Error()}))
 	}
 	if result.DeletedCount == 0 {
-		fmt.Println("DeleteOne() document not found")
+		fmt.Println("document not found")
 	}
 	return c.Render(http.StatusOK, r.JSON(result))
 

@@ -1,6 +1,6 @@
 import starSystem from '../lib/starSystem';
-function UserReviews({ filmId, titel, filmTitel, discription, score, dateOfCreation }) {
-  Object.assign(this, { filmId, titel, filmTitel, discription, score, dateOfCreation });
+function UserReviews({ filmId, titel, filmTitel, discription, score, dateOfCreation, posterUrl }) {
+  Object.assign(this, { filmId, titel, filmTitel, discription, score, dateOfCreation, posterUrl });
 }
 
 UserReviews.prototype.render = function () {
@@ -9,7 +9,7 @@ UserReviews.prototype.render = function () {
   <div class="card mb-3 c-reviews bg-dark text-light">
   <div class="row g-0">
   <div class="col-md-2">
-    <img src="https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/89058/93685/Joker-2019-Final-Style-steps-Poster-buy-original-movie-posters-at-starstills__62518.1572351179.jpg?c=2?imbypass=on" class="c-reviews-review-img" alt="..." />
+    <img src="http://image.tmdb.org/t/p/w500${this.posterUrl}" class="c-reviews-review-img" alt="..." />
   </div>
   <div class="col-md-10">
     <div class="card-body c-review-card">

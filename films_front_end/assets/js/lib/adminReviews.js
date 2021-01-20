@@ -30,14 +30,14 @@ const getAdminReviewsData = async () => {
   const data = await dataAccess.api.get(`films/Reviews/${id}`);
   console.log(data);
   let filmString = '';
-  for (const film of data) {
-    const b = new AdminReviewsTable(film);
-    filmString += b.render();
-  }
-  if (!filmString == []) {
-    document.querySelector('#c-tableReviews').innerHTML = filmString;
+  if (data == '[]') {
+    document.querySelector('#c-tableReviews').innerHTML = 'geen reviews gevonden';
   } else {
-    document.querySelector('#c-tableReviews').innerHTML = 'geen review gevonden';
+    for (const film of data) {
+      const b = new AdminReviewsTable(film);
+      filmString += b.render();
+    }
+    document.querySelector('#c-tableReviews').innerHTML = filmString;
   }
 };
 

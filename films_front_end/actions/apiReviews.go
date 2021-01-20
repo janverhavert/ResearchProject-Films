@@ -78,7 +78,7 @@ func getUserReviewsHandler(c buffalo.Context) error {
 	// we created Book array
 	var films []models.Reviews
 	// bson.M{},  we passed empty filter. So we want to get all data.
-	cur, err := collection.Find(context.TODO(), bson.M{"UserId": id})
+	cur, err := collection.Find(context.TODO(), bson.M{"userId": id})
 	if err != nil {
 		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": "error!"}))
 	}

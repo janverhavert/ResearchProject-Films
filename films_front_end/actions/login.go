@@ -11,3 +11,9 @@ import (
 func LoginHandler(c buffalo.Context) error {
 	return c.Render(http.StatusOK, r.HTML("login.html"))
 }
+func RegistrerenHandler(c buffalo.Context) error {
+	return c.Render(http.StatusOK, r.HTML("registreren.html"))
+}
+func ProfielHandler(c buffalo.Context) error {
+	return c.Render(http.StatusOK, r.HTML("profiel.html"))
+}

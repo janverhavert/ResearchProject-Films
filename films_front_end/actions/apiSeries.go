@@ -24,7 +24,7 @@ func getSeriesHandler(c buffalo.Context) error {
 	var films []models.Film
 
 	// bson.M{},  we passed empty filter. So we want to get all data.
-	cur, err := collection.Find(context.TODO(), bson.M{"serie": true})
+	cur, err := collection.Find(context.TODO(), bson.M{"type": "tv"})
 
 	if err != nil {
 		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": "error!"}))
@@ -54,7 +54,11 @@ func getSeriesHandler(c buffalo.Context) error {
 	if err := cur.Err(); err != nil {
 		log.Fatal(err)
 	}
-	return c.Render(http.StatusOK, r.JSON(films))
+	if len(films) == 0 {
+		return c.Render(http.StatusOK, r.JSON("[]"))
+	} else {
+		return c.Render(http.StatusOK, r.JSON(films))
+	}
 	//json.NewEncoder(http.ResponseWriter).Encode()
 
 }
@@ -69,7 +73,7 @@ func getSeriebyNameHandler(c buffalo.Context) error {
 	var films []models.Film
 	fmt.Println(name)
 	// bson.M{},  we passed empty filter. So we want to get all data.
-	cur, err := collection.Find(context.TODO(), bson.M{"titel": name, "serie": true})
+	cur, err := collection.Find(context.TODO(), bson.M{"titel": name, "type": "tv"})
 	if err != nil {
 		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": err.Error()}))
 	}

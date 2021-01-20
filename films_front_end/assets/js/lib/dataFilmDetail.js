@@ -18,6 +18,7 @@ const dataFilmDetail = async () => {
     console.log(dataWatched);
     document.querySelector('#c-review-form').innerHTML = reviewForm();
     data['watched'] = false;
+
     for (const watchedlist of dataWatched) {
       if (watchedlist.filmId == id) {
         data['watched'] = true;
@@ -58,14 +59,14 @@ const getReviews = async () => {
   const dataReviews = await dataAccess.api.get(apiReviews);
 
   let reviewString = '';
-  for (const review of dataReviews) {
-    const b = new Reviews(review);
-    reviewString += b.render();
-  }
-  if (!reviewString == []) {
-    document.querySelector('#c-reviews').innerHTML = reviewString;
-  } else {
+  if (dataReviews == '[]') {
     document.querySelector('.js-eerste').innerHTML = 'Wees de eerste';
+  } else {
+    for (const review of dataReviews) {
+      const b = new Reviews(review);
+      reviewString += b.render();
+    }
+    document.querySelector('#c-reviews').innerHTML = reviewString;
   }
 };
 
