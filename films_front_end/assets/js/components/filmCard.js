@@ -4,7 +4,7 @@ function Films({ filmId, titel, posterUrl }) {
 
 Films.prototype.render = function () {
   return `
-  <div class="col-sm-6 col-md-1 col-lg-1 c-app-col">
+  <div class="col-xs-6 col-sm-4 col-md-2 col-lg-1 c-app-col">
     <a href="/film/${this.filmId}">
         <div class="card c-card-div text-center pl-0">
             <div class="card-body c-card-body">

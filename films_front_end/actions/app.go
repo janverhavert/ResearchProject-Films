@@ -69,7 +69,7 @@ func App() *buffalo.App {
 		app.GET("/api/Films", getFilmsHandler)
 		app.DELETE("/api/Films/{id}", deleteFilmHandler)
 		app.POST("/api/Film", createFilmHandler)
-		app.PUT("/api/Film", updateFilmHandler)
+		app.PUT("/api/Film/{id}", updateFilmHandler)
 		app.GET("/api/Film/{id}", getFilmbyIdHandler)
 		app.GET("/api/Films/genre/{id}", getGenreByFilmHandler)
 		app.GET("/api/Films/{name}", getFilmbyNameHandler)

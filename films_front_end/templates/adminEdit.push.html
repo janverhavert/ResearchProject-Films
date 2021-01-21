@@ -3,10 +3,11 @@
   <div class="card mb-3">
     <div class="row no-gutters">
       <div class="col-md-4">
-        <img src="https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/89058/93685/Joker-2019-Final-Style-steps-Poster-buy-original-movie-posters-at-starstills__62518.1572351179.jpg?c=2?imbypass=on" class="card-img h-100" alt="banner" />
+        <img src="" class="card-img h-100" alt="banner" id="FilmPoster"/>
       </div>
       <div class="col-md-8">
         <div class="card-body c-filmsdetail-card-body">
+          <h2 class="js-titel"></h2>
             <div class="form-row">
               <div class="form-group col-md-6 col-sm-12">
                 <label htmlFor="FilmNaam">Titel</label>
@@ -40,15 +41,15 @@
               <div class="form-group col-md-3 col-sm-6">
                 <label htmlFor="FilmType">Film of serie?</label>
                 <select class="form-control" id="FilmType">
-                    <option value="false">Film</option>
-                    <option value="true">Serie</option>
+                    <option value="movie">Film</option>
+                    <option value="tv">Serie</option>
                 </select>
               </div>
             </div>
 
             <div class="form-row">
               <div class="form-group col-md-3 col-sm-6">
-                <label htmlFor="FilmDuur">Duratie</label>
+                <label htmlFor="FilmDuur">Duratie (min)</label>
                 <input type="number" class="form-control" id="FilmDuur" placeholder="Minuten"  />
               </div>
             </div>
@@ -57,14 +58,6 @@
                 <label htmlFor="FilmDiscription">Discriptie</label>
 
                 <textarea class="form-control" id="FilmDiscription"></textarea>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group col-md-6 col-sm-12">
-                <input type="file" class="custom-file-input" id="customFile" />
-                <label class="custom-file-label" htmlFor="customFile">
-                  Poster kiezen
-                </label>
                 <p class="c-login-feedback" id="c-feedback">gelieve alle velden in te vullen</p>
               </div>
             </div>

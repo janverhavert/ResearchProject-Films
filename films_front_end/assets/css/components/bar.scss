@@ -1,18 +1,24 @@
 .c-bar {
   border-top: 1px solid black;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  // display: flex;
+  // justify-content: space-between;
+  // align-items: center;
   width: 100%;
   //background-color: rgb(65, 65, 65);
-  padding: 0 24px;
+  padding: 5px 18px;
   margin: 0;
-  height: 50px;
+  //max-height: 50px;
 }
 .c-bar-dropdown {
 }
 .c-dropdown-item {
   display: inline;
+}
+.c-bar-search-div {
+  border-radius: 5px;
+  background-color: rgb(104, 97, 97);
+  padding: 0;
+  margin-left: 12px;
 }
 .c-bar-button {
   display: flex;
@@ -23,4 +29,17 @@
 }
 .c-bar-input {
   padding: 0;
+}
+.c-bar-search {
+  fill: white;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //padding-top: 5px;
+  //padding-bottom: 5px;
+}
+.c-bar-search-icon {
+  fill: white;
+  width: 25px;
 }

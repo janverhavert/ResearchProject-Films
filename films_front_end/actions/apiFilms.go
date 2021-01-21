@@ -71,7 +71,7 @@ func getFilmbyNameHandler(c buffalo.Context) error {
 	var films []models.Film
 	fmt.Println(name)
 	// bson.M{},  we passed empty filter. So we want to get all data.
-	cur, err := collection.Find(context.TODO(), bson.M{"$titel": bson.M{"$in": name}, "type": "movie"})
+	cur, err := collection.Find(context.TODO(), bson.M{"titel": name, "type": "movie"})
 	if err != nil {
 		return c.Render(http.StatusNotFound, r.JSON(map[string]string{"message": "error!"}))
 	}

@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"time"
 
+	tmdb "github.com/cyruzin/golang-tmdb"
 	"github.com/gobuffalo/buffalo"
 	"github.com/google/uuid"
 	"github.com/gorilla/mux"
@@ -139,13 +139,22 @@ func createFilmHandler(c buffalo.Context) error {
 	collection := helper.ConnectDBFilms()
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var film models.Film
+	tmdbClient, err := tmdb.Init("54ca5c0ee715b67fdec29283a02c0648")
+	if err != nil {
+		fmt.Println(err)
+	}
+
 	newId := generateGUID()
+
 	film.FilmId = newId
-	film.Type = "movie"
-	film.ReleaseDatum = time.Now()
 	// we decode our body request params
 	_ = json.NewDecoder(c.Request().Body).Decode(&film)
-
+	movie, err := tmdbClient.GetSearchMulti(film.Titel, nil)
+	if err != nil {
+		fmt.Println(err)
+	}
+	film.PosterUrl = movie.Results[0].PosterPath
+	fmt.Println(film)
 	// insert our book model.
 	result, err := collection.InsertOne(context.TODO(), film)
 
@@ -186,45 +195,50 @@ func updateFilmHandler(c buffalo.Context) error {
 	id, _ := params["id"]
 
 	var film models.Film
-
 	// Create filter
 	filter := bson.M{"filmId": id}
 
 	// Read update model from body request
 	_ = json.NewDecoder(c.Request().Body).Decode(&film)
-
 	// prepare update model.
-	update := bson.D{
-		{"$set", bson.D{
-			{"filmId", film.FilmId},
-			{"titel", film.Titel},
-			{"director", film.Director},
-			{"serie", film.Type},
-			{"duur", film.Duur},
-			{"discription", film.Discription},
-			//{"releaseDatum", film.ReleaseDatum},
-			{"genres", bson.D{
-				{"genreId", film.Genres[0].GenreId},
-				{"genreName", film.Genres[0].GenreName},
-			}},
-		}},
-	}
+	// update := bson.M{
+	// 	"filmId":       id,
+	// 	"titel":        film.Titel,
+	// 	"director":     film.Director,
+	// 	"type":         film.Type,
+	// 	"duur":         film.Duur,
+	// 	"discription":  film.Discription,
+	// 	"posterUrl":    film.PosterUrl,
+	// 	"releaseDatum": film.ReleaseDatum,
+	// 	"genres": bson.M{
+	// 		"genreId":   film.Genres[0].GenreId,
+	// 		"genreName": film.Genres[0].GenreName,
+	// 	},
+	// }
+	// addgenres := []models.Genres{models.Genres{
+	// 	GenreId:   film.Genres[0].GenreId,
+	// 	GenreName: film.Genres[0].GenreName,
+	// },
+	// }
+	// update := bson.M{"$push": bson.M{"genres": bson.M{"genre": addgenres}}}
 
-	err := collection.FindOneAndUpdate(context.TODO(), filter, update).Decode(&film)
+	result, err := collection.ReplaceOne(context.TODO(), filter, film)
 
 	if err != nil {
-		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": "error!"}))
+		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": err.Error()}))
 	}
 
 	film.FilmId = id
 
-	return c.Render(http.StatusOK, r.JSON(film))
+	return c.Render(http.StatusOK, r.JSON(result))
 
 	//json.NewEncoder(http.ResponseWriter).Encode()
 
 }
 func deleteFilmHandler(c buffalo.Context) error {
 	collection := helper.ConnectDBFilms()
+	collectionReviews := helper.ConnectDBReviews()
+	collectionWatched := helper.ConnectDBWatched()
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var params = mux.Vars(c.Request())
 
@@ -239,8 +253,10 @@ func deleteFilmHandler(c buffalo.Context) error {
 		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": err.Error()}))
 	}
 	if result.DeletedCount == 0 {
-		fmt.Println("DeleteOne() document not found")
+		fmt.Println("document not found")
 	}
+	collectionReviews.DeleteMany(context.TODO(), filter)
+	collectionWatched.DeleteMany(context.TODO(), filter)
 	return c.Render(http.StatusOK, r.JSON(result))
 
 	//json.NewEncoder(http.ResponseWriter).Encode()
