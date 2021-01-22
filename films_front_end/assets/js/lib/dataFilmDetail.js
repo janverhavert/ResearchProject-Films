@@ -10,46 +10,50 @@ const dataFilmDetail = async () => {
 
   let apiWatched = `Watched/${localStorage.getItem('UserId')}`;
   const data = await dataAccess.api.get(api);
-  console.log(data);
-  const dataReviews = await dataAccess.api.get(apiReviews);
-  console.log(dataReviews);
-  if (localStorage.getItem('UserId')) {
-    const dataWatched = await dataAccess.api.get(apiWatched);
-    console.log(dataWatched);
-    document.querySelector('#c-review-form').innerHTML = reviewForm();
-    data['watched'] = false;
+  if (data.message == 'error!') {
+    window.location.href = '/';
+  } else {
+    console.log(data);
+    const dataReviews = await dataAccess.api.get(apiReviews);
+    console.log(dataReviews);
+    if (localStorage.getItem('UserId')) {
+      const dataWatched = await dataAccess.api.get(apiWatched);
+      console.log(dataWatched);
+      document.querySelector('#c-review-form').innerHTML = reviewForm();
+      data['watched'] = false;
 
-    for (const watchedlist of dataWatched) {
-      if (watchedlist.filmId == id) {
-        data['watched'] = true;
-        break;
+      for (const watchedlist of dataWatched) {
+        if (watchedlist.filmId == id) {
+          data['watched'] = true;
+          break;
+        }
       }
     }
-  }
 
-  var sum = 0;
-  for (var i = 0; i < dataReviews.length; i++) {
-    console.log(dataReviews[i].score);
-    (sum += dataReviews[i].score), 10; //don't forget to add the base
-  }
-  var avg = sum / dataReviews.length;
-  data['avg'] = Math.round(avg * 10) / 10;
-  data['reviews'] = dataReviews;
+    var sum = 0;
+    for (var i = 0; i < dataReviews.length; i++) {
+      console.log(dataReviews[i].score);
+      (sum += dataReviews[i].score), 10; //don't forget to add the base
+    }
+    var avg = sum / dataReviews.length;
+    data['avg'] = Math.round(avg * 10) / 10;
+    data['reviews'] = dataReviews;
 
-  filmDetail(data);
-  getReviews();
-  const button = document.querySelector('.js-watched');
-  console.log(button.id);
-  button.onclick = function () {
-    console.log('click');
-    Watched.call(this, data.filmId, button);
-  };
-  const buttonReview = document.querySelector('.js-review');
-  console.log(buttonReview);
-  buttonReview.onclick = function () {
-    console.log('click');
-    Review.call(this, data.filmId, localStorage.getItem('UserId'));
-  };
+    filmDetail(data);
+    getReviews();
+    const button = document.querySelector('.js-watched');
+    console.log(button.id);
+    button.onclick = function () {
+      console.log('click');
+      Watched.call(this, data.filmId, button);
+    };
+    const buttonReview = document.querySelector('.js-review');
+    console.log(buttonReview);
+    buttonReview.onclick = function () {
+      console.log('click');
+      Review.call(this, data.filmId, localStorage.getItem('UserId'));
+    };
+  }
 };
 
 const getReviews = async () => {

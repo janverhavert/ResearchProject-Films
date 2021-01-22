@@ -20,7 +20,7 @@ import (
 // a home page.
 
 func getFilmReviewsHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBReviews()
+	collection := helper.ConnectDB().Collection("reviews")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var params = mux.Vars(c.Request())
 
@@ -69,7 +69,7 @@ func getFilmReviewsHandler(c buffalo.Context) error {
 
 }
 func getUserReviewsHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBReviews()
+	collection := helper.ConnectDB().Collection("reviews")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var params = mux.Vars(c.Request())
 
@@ -108,12 +108,16 @@ func getUserReviewsHandler(c buffalo.Context) error {
 		log.Fatal(err)
 	}
 	fmt.Println(films)
-	return c.Render(http.StatusOK, r.JSON(films))
+	if len(films) == 0 {
+		return c.Render(http.StatusOK, r.JSON("[]"))
+	} else {
+		return c.Render(http.StatusOK, r.JSON(films))
+	}
 	//json.NewEncoder(http.ResponseWriter).Encode()
 
 }
 func createReviewHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBReviews()
+	collection := helper.ConnectDB().Collection("reviews")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var review models.Reviews
 
@@ -134,7 +138,7 @@ func createReviewHandler(c buffalo.Context) error {
 
 }
 func deleteReviewHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBReviews()
+	collection := helper.ConnectDB().Collection("reviews")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var params = mux.Vars(c.Request())
 

@@ -15,7 +15,7 @@ import (
 // HomeHandler is a default handler to serve up
 // a home page.
 func getGenresHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBGenres()
+	collection := helper.ConnectDB().Collection("genres")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 
 	// we created Book array

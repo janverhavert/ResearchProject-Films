@@ -39,6 +39,7 @@ func App() *buffalo.App {
 			Env:         ENV,
 			SessionName: "_films_front_end_session",
 		})
+
 		// Automatically redirect to SSL
 		app.Use(forceSSL())
 		// Log request parameters (filters apply).
@@ -50,8 +51,8 @@ func App() *buffalo.App {
 
 		// Setup and use translations:
 		app.Use(translations())
-		//website
 
+		//website
 		app.GET("/", HomeHandler)
 		app.GET("/series", SeriesHandler)
 		app.GET("/watched", WatchedHandler)
@@ -72,6 +73,7 @@ func App() *buffalo.App {
 		app.PUT("/api/Film/{id}", updateFilmHandler)
 		app.GET("/api/Film/{id}", getFilmbyIdHandler)
 		app.GET("/api/Films/genre/{id}", getGenreByFilmHandler)
+		app.GET("/api/Series/genre/{id}", getGenreBySerieHandler)
 		app.GET("/api/Films/{name}", getFilmbyNameHandler)
 		app.GET("/api/Series/{name}", getSeriebyNameHandler)
 		app.GET("/api/films/Reviews/{id}", getFilmReviewsHandler)

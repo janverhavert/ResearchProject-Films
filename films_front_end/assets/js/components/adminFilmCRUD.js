@@ -11,10 +11,11 @@ const filmCRUD = (action) => {
     var duur = document.getElementById('FilmDuur').value;
     var discription = document.getElementById('FilmDiscription').value;
     console.log(datum);
-    var filmID = document.querySelector('.js-titel').id;
+
     if (action == 'POST') {
       var formData = JSON.stringify({ titel: naam, director: regisseur, duur: parseInt(duur), type: type, discription: discription, genres: [{ genreId: genreId, genreName: genreNaam }], releaseDatum: datum + 'Z' });
     } else if (action == 'PUT') {
+      var filmID = document.querySelector('.js-titel').id;
       var posterfullurl = document.getElementById('FilmPoster').src;
       var posterurl = posterfullurl.substring(posterfullurl.lastIndexOf('/') + 1);
       console.log(posterurl);

@@ -8,7 +8,7 @@ AdminTable.prototype.render = function () {
   <th scope="row">${this.filmId}</th>
   <td>${this.titel}</td>
   <td>${this.type}</td>
-  <td>${this.releaseDatum}</td>
+  <td>${this.releaseDatum.toString().split('T')[0]}</td>
   <td>
     <div>
         <a href="/adminReviews/${this.filmId}">
@@ -21,7 +21,7 @@ AdminTable.prototype.render = function () {
           Edit
         </button>
         </a>
-      <button class="btn btn-primary c-table-button  c-app-buttons-selected js-delete" type="button" id="${this.filmId}">
+      <button class="btn btn-primary c-table-button  c-app-buttons-selected c-table-button-delete js-delete" type="button" id="${this.filmId}">
         Delete
       </button>
     </div>

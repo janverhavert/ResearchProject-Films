@@ -19,7 +19,7 @@ import (
 // HomeHandler is a default handler to serve up
 // a home page.
 func getAllHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBFilms()
+	collection := helper.ConnectDB().Collection("films")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 
 	// we created Book array
@@ -62,7 +62,7 @@ func getAllHandler(c buffalo.Context) error {
 }
 
 func getFilmbyIdHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBFilms()
+	collection := helper.ConnectDB().Collection("films")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var film models.Film
 	var params = mux.Vars(c.Request())
@@ -86,57 +86,8 @@ func getFilmbyIdHandler(c buffalo.Context) error {
 
 }
 
-func getGenreByFilmHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBFilms()
-	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
-	var params = mux.Vars(c.Request())
-
-	//Get id from parameters
-	id, _ := params["id"]
-	fmt.Println(id)
-	// we created Book array
-	var films []models.Film
-	fmt.Println(films)
-	// bson.M{},  we passed empty filter. So we want to get all data.
-	cur, err := collection.Aggregate(context.TODO(), bson.M{"genres": bson.M{"genreId": id}})
-	if err != nil {
-		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": err.Error()}))
-	}
-
-	// Close the cursor once finished
-	/*A defer statement defers the execution of a function until the surrounding function returns.
-	simply, run cur.Close() process but after cur.Next() finished.*/
-	defer cur.Close(context.TODO())
-
-	for cur.Next(context.TODO()) {
-
-		// create a value into which the single document can be decoded
-		var film models.Film
-		// & character returns the memory address of the following variable.
-		err := cur.Decode(&film) // decode similar to deserialize process.
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		// add item our array
-
-		films = append(films, film)
-
-	}
-
-	if err := cur.Err(); err != nil {
-		log.Fatal(err)
-	}
-	if len(films) == 0 {
-		return c.Render(http.StatusOK, r.JSON("[]"))
-	} else {
-		return c.Render(http.StatusOK, r.JSON(films))
-	}
-	//json.NewEncoder(http.ResponseWriter).Encode()
-
-}
 func createFilmHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBFilms()
+	collection := helper.ConnectDB().Collection("films")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var film models.Film
 	tmdbClient, err := tmdb.Init("54ca5c0ee715b67fdec29283a02c0648")
@@ -187,7 +138,7 @@ func createFilmHandler(c buffalo.Context) error {
 
 // }
 func updateFilmHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBFilms()
+	collection := helper.ConnectDB().Collection("films")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var params = mux.Vars(c.Request())
 
@@ -236,9 +187,9 @@ func updateFilmHandler(c buffalo.Context) error {
 
 }
 func deleteFilmHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBFilms()
-	collectionReviews := helper.ConnectDBReviews()
-	collectionWatched := helper.ConnectDBWatched()
+	collection := helper.ConnectDB().Collection("films")
+	collectionReviews := helper.ConnectDB().Collection("reviews")
+	collectionWatched := helper.ConnectDB().Collection("genres")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var params = mux.Vars(c.Request())
 

@@ -12,6 +12,8 @@ import (
 // call `app.Serve()`, unless you don't want to start your
 // application that is. :)
 func main() {
+	//voor data te seeden heel dit uit commentaar
+	//helper.Seeder()
 
 	app := actions.App()
 	if err := app.Serve(); err != nil {

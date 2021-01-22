@@ -19,7 +19,7 @@ import (
 // HomeHandler is a default handler to serve up
 // a home page.
 func getWatchedHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBWatched()
+	collection := helper.ConnectDB().Collection("watched")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var params = mux.Vars(c.Request())
 
@@ -67,7 +67,7 @@ func getWatchedHandler(c buffalo.Context) error {
 
 }
 func createWatchedHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBWatched()
+	collection := helper.ConnectDB().Collection("watched")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var review models.Reviews
 
@@ -88,7 +88,7 @@ func createWatchedHandler(c buffalo.Context) error {
 
 }
 func deleteWatchedHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBWatched()
+	collection := helper.ConnectDB().Collection("watched")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var params = mux.Vars(c.Request())
 

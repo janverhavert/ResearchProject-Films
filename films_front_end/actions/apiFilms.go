@@ -16,7 +16,8 @@ import (
 // HomeHandler is a default handler to serve up
 // a home page.
 func getFilmsHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBFilms()
+
+	collection := helper.ConnectDB().Collection("films")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 
 	// we created Book array
@@ -61,7 +62,7 @@ func getFilmsHandler(c buffalo.Context) error {
 
 }
 func getFilmbyNameHandler(c buffalo.Context) error {
-	collection := helper.ConnectDBFilms()
+	collection := helper.ConnectDB().Collection("films")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 	var params = mux.Vars(c.Request())
 
@@ -101,7 +102,60 @@ func getFilmbyNameHandler(c buffalo.Context) error {
 		log.Fatal(err)
 	}
 	fmt.Println(films)
-	return c.Render(http.StatusOK, r.JSON(films))
+	if len(films) == 0 {
+		return c.Render(http.StatusOK, r.JSON("[]"))
+	} else {
+		return c.Render(http.StatusOK, r.JSON(films))
+	}
+	//json.NewEncoder(http.ResponseWriter).Encode()
+
+}
+func getGenreByFilmHandler(c buffalo.Context) error {
+	collection := helper.ConnectDB().Collection("films")
+	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
+	var params = mux.Vars(c.Request())
+
+	//Get id from parameters
+	id, _ := params["id"]
+	fmt.Println(id)
+	// we created Book array
+	var films []models.Film
+	fmt.Println(films)
+	// bson.M{},  we passed empty filter. So we want to get all data.
+	cur, err := collection.Find(context.TODO(), bson.M{"genres.genreId": id, "type": "movie"})
+	if err != nil {
+		return c.Render(http.StatusBadRequest, r.JSON(map[string]string{"message": err.Error()}))
+	}
+
+	// Close the cursor once finished
+	/*A defer statement defers the execution of a function until the surrounding function returns.
+	simply, run cur.Close() process but after cur.Next() finished.*/
+	defer cur.Close(context.TODO())
+
+	for cur.Next(context.TODO()) {
+
+		// create a value into which the single document can be decoded
+		var film models.Film
+		// & character returns the memory address of the following variable.
+		err := cur.Decode(&film) // decode similar to deserialize process.
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		// add item our array
+
+		films = append(films, film)
+
+	}
+
+	if err := cur.Err(); err != nil {
+		log.Fatal(err)
+	}
+	if len(films) == 0 {
+		return c.Render(http.StatusOK, r.JSON("[]"))
+	} else {
+		return c.Render(http.StatusOK, r.JSON(films))
+	}
 	//json.NewEncoder(http.ResponseWriter).Encode()
 
 }

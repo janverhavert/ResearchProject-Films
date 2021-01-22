@@ -12,7 +12,7 @@ import (
 	"github.com/google/uuid"
 )
 
-func seeder() {
+func Seeder() {
 
 	filmNamen := []string{"Soul", "Master", "WandaVision", "The Queen's Gambit", "Tenet", "The Dissident", "Sound of Metal", "The Godfather", "The Lord of the Rings: The Fellowship of the Ring", "Interstellar", "Inception", "The Departed"}
 	filmDirectors := []string{"Ardath Ganser", "Lea Marchand", "Muoi Sutcliffe", "Cyrstal Igoe", "Phoebe Gauthier", "Yadira Capasso", "Bobbye Wasielewski", "Rebbecca Fain", "Candyce Twiggs", "Charis Cuevas", "Ulrike Gillie", "Marti Hornyak", "Perla Greve", "Desire Pajak", "Audry Jaworski", "Corrie Baez", "Elsa Nez"}
@@ -27,7 +27,7 @@ func seeder() {
 		}
 		fmt.Print(e)
 
-		collection := helper.ConnectDBGenres()
+		collection := helper.ConnectDB().Collection("genres")
 		collection.InsertOne(context.TODO(), e)
 		value++
 	}
@@ -64,11 +64,10 @@ func seeder() {
 			},
 		}
 
-		collection := helper.ConnectDBFilms()
+		collection := helper.ConnectDB().Collection("films")
 		collection.InsertOne(context.TODO(), e)
 		value++
 	}
-
 }
 
 func randate() time.Time {
