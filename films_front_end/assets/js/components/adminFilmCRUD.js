@@ -37,12 +37,12 @@ const filmCRUD = (action) => {
       if (action == 'POST') {
         fetch('http://127.0.0.1:3000/api/Film/', requestOptions)
           .then((response) => response.text())
-          .then((result) => console.log(result))
+          .then((result) => (window.location.href = '/admin'))
           .catch((error) => errorDisplay(error));
       } else if (action == 'PUT') {
         fetch(`http://127.0.0.1:3000/api/Film/${filmID}`, requestOptions)
           .then((response) => response.text())
-          .then((result) => console.log(result))
+          .then((result) => (window.location.href = '/admin'))
           .catch((error) => errorDisplay(error));
       }
     } else {
