@@ -31,12 +31,24 @@ document.addEventListener('DOMContentLoaded', async function () {
     dataFilmCard('Series');
     bar('Series');
   } else if (window.location.href == url + '/watched') {
-    document.querySelector('#c-watch').className = 'nav-link active';
-    dataWatched('Watched');
+    if (localStorage.getItem('UserRole') == 'Admin' || localStorage.getItem('UserRole') == 'Customer') {
+      document.querySelector('#c-watch').className = 'nav-link active';
+      dataWatched('Watched');
+    } else {
+      window.location.href = '/';
+    }
   } else if (window.location.href == url + '/adminAdd') {
-    adminAdd();
+    if (localStorage.getItem('UserRole') == 'Admin') {
+      adminAdd();
+    } else {
+      window.location.href = '/';
+    }
   } else if (window.location.href.includes(url + '/adminEdit')) {
-    adminEdit();
+    if (localStorage.getItem('UserRole') == 'Admin') {
+      adminEdit();
+    } else {
+      window.location.href = '/';
+    }
   } else if (window.location.href == url + '/profiel') {
     if (localStorage.getItem('UserRole') == 'Admin' || localStorage.getItem('UserRole') == 'Customer') {
       profiel();
@@ -46,9 +58,17 @@ document.addEventListener('DOMContentLoaded', async function () {
   } else if (window.location.href.includes(url + '/film')) {
     dataFilmDetail();
   } else if (window.location.href.includes(url + '/adminReviews')) {
-    adminReviews();
+    if (localStorage.getItem('UserRole') == 'Admin') {
+      adminReviews();
+    } else {
+      window.location.href = '/';
+    }
   } else if (window.location.href.includes(url + '/admin')) {
-    admin();
+    if (localStorage.getItem('UserRole') == 'Admin') {
+      admin();
+    } else {
+      window.location.href = '/';
+    }
   } else if (window.location.href.includes(url + '/login')) {
     document.getElementById('login').onclick = function () {
       login();
