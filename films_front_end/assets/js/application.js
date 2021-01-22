@@ -20,38 +20,40 @@ import adminReviews from './lib/adminReviews';
 
 document.addEventListener('DOMContentLoaded', async function () {
   header();
-  if (window.location.href == 'http://127.0.0.1:3000/') {
+  var url = 'http://127.0.0.1:3000';
+
+  if (window.location.href == url + '/') {
     document.querySelector('#c-filmheader').className = 'nav-link active';
     dataFilmCard('Films');
     bar('Films');
-  } else if (window.location.href == 'http://127.0.0.1:3000/series') {
+  } else if (window.location.href == url + '/series') {
     document.querySelector('#c-serie').className = 'nav-link active';
     dataFilmCard('Series');
     bar('Series');
-  } else if (window.location.href == 'http://127.0.0.1:3000/watched') {
+  } else if (window.location.href == url + '/watched') {
     document.querySelector('#c-watch').className = 'nav-link active';
     dataWatched('Watched');
-  } else if (window.location.href == 'http://127.0.0.1:3000/adminAdd') {
+  } else if (window.location.href == url + '/adminAdd') {
     adminAdd();
-  } else if (window.location.href.includes('http://127.0.0.1:3000/adminEdit')) {
+  } else if (window.location.href.includes(url + '/adminEdit')) {
     adminEdit();
-  } else if (window.location.href == 'http://127.0.0.1:3000/profiel') {
+  } else if (window.location.href == url + '/profiel') {
     if (localStorage.getItem('UserRole') == 'Admin' || localStorage.getItem('UserRole') == 'Customer') {
       profiel();
     } else {
       window.location.href = '/';
     }
-  } else if (window.location.href.includes('http://127.0.0.1:3000/film')) {
+  } else if (window.location.href.includes(url + '/film')) {
     dataFilmDetail();
-  } else if (window.location.href.includes('http://127.0.0.1:3000/adminReviews')) {
+  } else if (window.location.href.includes(url + '/adminReviews')) {
     adminReviews();
-  } else if (window.location.href.includes('http://127.0.0.1:3000/admin')) {
+  } else if (window.location.href.includes(url + '/admin')) {
     admin();
-  } else if (window.location.href.includes('http://127.0.0.1:3000/login')) {
+  } else if (window.location.href.includes(url + '/login')) {
     document.getElementById('login').onclick = function () {
       login();
     };
-  } else if (window.location.href.includes('http://127.0.0.1:3000/registreren')) {
+  } else if (window.location.href.includes(url + '/registreren')) {
     document.getElementById('registreren').onclick = function () {
       registreren();
     };
