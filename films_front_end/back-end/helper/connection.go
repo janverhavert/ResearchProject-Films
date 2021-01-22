@@ -61,7 +61,7 @@ func GetError(err error, w http.ResponseWriter) {
 
 func Seeder() {
 
-	filmNamen := []string{"Soul", "Master", "WandaVision", "The Queen's Gambit", "Tenet", "The Dissident", "Sound of Metal", "The Godfather", "The Lord of the Rings: The Fellowship of the Ring", "Interstellar", "Inception", "The Departed"}
+	filmNamen := []string{"Soul", "Master", "WandaVision", "The Queen's Gambit", "Tenet", "The Dissident", "Sound of Metal", "The Godfather", "The Lord of the Rings: The Fellowship of the Ring", "Interstellar", "Inception", "The Departed", "Breaking Bad", "Chernobyl", "Game of Thrones", "Game of Thrones", "Firefly", "The Office", "Seinfeld", "Peaky Blinders", "The Mandalorian ", "Dark", "Better Call Sau", "Stranger Things", "Arrested Development"}
 	filmDirectors := []string{"Ardath Ganser", "Lea Marchand", "Muoi Sutcliffe", "Cyrstal Igoe", "Phoebe Gauthier", "Yadira Capasso", "Bobbye Wasielewski", "Rebbecca Fain", "Candyce Twiggs", "Charis Cuevas", "Ulrike Gillie", "Marti Hornyak", "Perla Greve", "Desire Pajak", "Audry Jaworski", "Corrie Baez", "Elsa Nez"}
 	filmGenresnames := []string{"Actie", "Avontuur", "Romantiek", "Drama", "Thriller"}
 	filmGenresid := []string{"d227e9ba-8061-4a2e-a06a-e79ebf5ce8d9", "0c61dcec-e9b6-46e0-834a-553e7cf71602", "d537acff-4b4e-4c50-8897-f185c82f4743", "6c1343d8-04b3-4568-9ad7-96c76a98920a", "822ff23f-0843-41c1-8b3b-b5cab9328c9b"}
@@ -92,12 +92,12 @@ func Seeder() {
 		var discription = movie.Results[0].Overview
 		var posterId = movie.Results[0].PosterPath
 		var serieType = movie.Results[0].MediaType
-		var randomGenre = rand.Intn(4)
+		var randomGenre = rand.Intn(5)
 
 		e := models.Film{
 			FilmId:       generateGUID(),
 			Titel:        s,
-			Director:     filmDirectors[value],
+			Director:     filmDirectors[rand.Intn(10)],
 			Duur:         60 + rand.Intn(100),
 			Type:         serieType,
 			PosterUrl:    posterId,
