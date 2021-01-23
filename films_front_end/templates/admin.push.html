@@ -15,7 +15,27 @@
                 <th scope="col"></th>
               </tr>
             </thead>
-            <tbody id="c-table"></tbody>
+            <tbody id="c-table">
+              <%= for (film) in films { %>
+              <tr>
+                <th scope="row"><%= film.FilmId %></th>
+                <td><%= film.Titel %></td>
+                <td><%= film.Type %></td>
+                <td><%= film.ReleaseDatum %></td>
+                <td>
+                  <div>
+                    <a href="/adminReviews/<%= film.FilmId %>">
+                      <button class="btn btn-primary c-table-button c-app-buttons-selected" type="button">Reviews</button>
+                    </a>
+                    <a href="/adminEdit/<%= film.FilmId %>">
+                      <button class="btn btn-primary c-table-button c-app-buttons-selected" type="button">Edit</button>
+                    </a>
+                    <button class="btn btn-primary c-table-button c-app-buttons-selected c-table-button-delete js-delete" type="button" id="<%= film.FilmId %>">Delete</button>
+                  </div>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
           </table>
         </div>
       </div>

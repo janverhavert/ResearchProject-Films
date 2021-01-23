@@ -2,6 +2,7 @@ package actions
 
 import (
 	"encoding/json"
+	"errors"
 	"films_front_end/back-end/models"
 	"fmt"
 	"io/ioutil"
@@ -24,42 +25,53 @@ func HomeHandler(c buffalo.Context) error {
 	if err := json.Unmarshal(data, &films); err != nil {
 		panic(err)
 	}
-	c.Set("type", "Films")
+	if len(films) <= 0 {
+		c.Set("empty", "films")
+	}
 	c.Set("films", films)
 	return c.Render(http.StatusOK, r.HTML("main.html"))
 }
 
 func WatchedHandler(c buffalo.Context) error {
-	value, _ := c.Cookies().Get("UserId")
-	response, err := http.Get("http://127.0.0.1:3000/api/Watched/" + value)
-	if err != nil {
-		fmt.Printf("The HTTP request failed with error %s\n", err)
-	}
-
-	data, _ := ioutil.ReadAll(response.Body)
-	var watched []models.Watched
-	if err := json.Unmarshal(data, &watched); err != nil {
-		panic(err)
-	}
-	var films []models.Film
-	for _, s := range watched {
-		response, err := http.Get("http://127.0.0.1:3000/api/Film/" + s.FilmId)
+	role, _ := c.Cookies().Get("UserRole")
+	if role == "Admin" || role == "Costumer" {
+		value, _ := c.Cookies().Get("UserId")
+		response, err := http.Get("http://127.0.0.1:3000/api/Watched/" + value)
 		if err != nil {
 			fmt.Printf("The HTTP request failed with error %s\n", err)
 		}
 
 		data, _ := ioutil.ReadAll(response.Body)
-		var film models.Film
-		if err := json.Unmarshal(data, &film); err != nil {
+		var watched []models.Watched
+		if err := json.Unmarshal(data, &watched); err != nil {
 			panic(err)
 		}
-		films = append(films, film)
+		var films []models.Film
+		for _, s := range watched {
+			response, err := http.Get("http://127.0.0.1:3000/api/Film/" + s.FilmId)
+			if err != nil {
+				fmt.Printf("The HTTP request failed with error %s\n", err)
+			}
+
+			data, _ := ioutil.ReadAll(response.Body)
+			var film models.Film
+			if err := json.Unmarshal(data, &film); err != nil {
+				panic(err)
+			}
+			films = append(films, film)
+		}
+
+		c.Set("type", "Watched")
+		c.Set("films", films)
+		fmt.Println(films)
+		if len(films) <= 0 {
+			c.Set("empty", "films")
+		}
+		return c.Render(http.StatusOK, r.HTML("main.html"))
+	} else {
+		return c.Error(401, errors.New("Unauthorized!"))
 	}
 
-	c.Set("type", "Watched")
-	c.Set("films", films)
-
-	return c.Render(http.StatusOK, r.HTML("main.html"))
 }
 
 func SeriesHandler(c buffalo.Context) error {
@@ -73,7 +85,9 @@ func SeriesHandler(c buffalo.Context) error {
 	if err := json.Unmarshal(data, &films); err != nil {
 		panic(err)
 	}
-	c.Set("type", "Series")
+	if len(films) <= 0 {
+		c.Set("empty", "series")
+	}
 	c.Set("films", films)
 	return c.Render(http.StatusOK, r.HTML("main.html"))
 }

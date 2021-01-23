@@ -9,11 +9,10 @@ UserReviews.prototype.render = function () {
   <div class="card mb-3 c-reviews bg-dark text-light">
   <div class="row g-0">
   <div class="col-md-2">
-    <img src="http://image.tmdb.org/t/p/w500${this.posterUrl}" class="c-reviews-review-img" alt="..." />
+    <img src="http://image.tmdb.org/t/p/w500${this.posterUrl}" class="c-reviews-review-img" alt="poster" />
   </div>
   <div class="col-md-10">
     <div class="card-body c-review-card">
-      <div class="c-review-delete">delete</div>
       <div>
         <h5 class="card-title c-profiel-review-titel">${this.filmTitel} - ${this.titel.charAt(0).toUpperCase() + this.titel.slice(1)}</h5>
         <p class="card-text c-filmdetail-info-div">

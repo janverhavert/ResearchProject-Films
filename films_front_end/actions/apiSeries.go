@@ -54,11 +54,7 @@ func getSeriesHandler(c buffalo.Context) error {
 	if err := cur.Err(); err != nil {
 		log.Fatal(err)
 	}
-	if len(films) == 0 {
-		return c.Render(http.StatusOK, r.JSON("[]"))
-	} else {
-		return c.Render(http.StatusOK, r.JSON(films))
-	}
+	return c.Render(http.StatusOK, r.JSON(films))
 	//json.NewEncoder(http.ResponseWriter).Encode()
 
 }
@@ -148,11 +144,7 @@ func getGenreBySerieHandler(c buffalo.Context) error {
 	if err := cur.Err(); err != nil {
 		log.Fatal(err)
 	}
-	if len(films) == 0 {
-		return c.Render(http.StatusOK, r.JSON("[]"))
-	} else {
-		return c.Render(http.StatusOK, r.JSON(films))
-	}
+	return c.Render(http.StatusOK, r.JSON(films))
 	//json.NewEncoder(http.ResponseWriter).Encode()
 
 }

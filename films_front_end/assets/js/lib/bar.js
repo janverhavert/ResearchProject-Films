@@ -1,11 +1,10 @@
 import Genre from '../components/genreDropdown';
-import dataGet from '../lib/dataGet';
 import dataAccess from '../lib/dataAccess';
-
+import Films from '../components/filmCard';
 const bar = async (type) => {
   const data = await dataAccess.api.get('Genres');
   let filmString = '';
-  if (data == '[]') {
+  if (data == null) {
     document.querySelector('#c-categorieen').innerHTML = 'Geen genres gevonden';
   } else {
     for (const film of data) {
@@ -29,5 +28,18 @@ const bar = async (type) => {
     };
   }
 };
+const dataGet = async (link) => {
+  const data = await dataAccess.api.get(link);
+  let filmString = '';
+  if (data == null) {
+    document.querySelector('#c-films').innerHTML = '<div class="c-app-empty">Geen films gevonden</div>';
+  } else {
+    for (const film of data) {
+      const b = new Films(film);
 
+      filmString += b.render();
+    }
+    document.querySelector('#c-films').innerHTML = filmString;
+  }
+};
 export default bar;

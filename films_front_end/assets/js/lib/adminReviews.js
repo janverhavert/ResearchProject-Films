@@ -1,7 +1,7 @@
 import dataAccess from '../lib/dataAccess';
-import AdminReviewsTable from '../components/adminReviewstable';
+//import AdminReviewsTable from '../components/adminReviewstable';
 const admin = async () => {
-  await getAdminReviewsData();
+  //await getAdminReviewsData();
   adminDelete();
 };
 
@@ -27,7 +27,7 @@ const getAdminReviewsData = async () => {
   var id = url.substring(url.lastIndexOf('/') + 1);
   const data = await dataAccess.api.get(`films/Reviews/${id}`);
   let filmString = '';
-  if (data == '[]') {
+  if (data == null) {
     document.querySelector('#c-tableReviews').innerHTML = 'geen reviews gevonden';
   } else {
     for (const film of data) {

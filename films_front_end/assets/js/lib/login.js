@@ -54,6 +54,7 @@ const inloggen = (userData) => {
   var userName = user.user.userName;
   var userRole = user.assignedRoles[0];
   document.cookie = `UserId=${userId}; expires=Sun, 1 Jan 2023 00:00:00 UTC; path=/`;
+  document.cookie = `UserRole=${userRole}; expires=Sun, 1 Jan 2023 00:00:00 UTC; path=/`;
   localStorage.setItem('UserId', userId);
   localStorage.setItem('UserRole', userRole);
   localStorage.setItem('UserName', userName);

@@ -1,6 +1,5 @@
 <main class="c-app">
-  <%= if (!type == Watched) { partial("bar.html") } %>
-
+  <%= if (!type) { partial("bar.html") } %> <%= if (empty) { partial("empty.html") } %>
   <div class="row c-app-row c-film" id="c-films">
     <%= for (film) in films { %>
     <div class="col-xs-6 col-sm-4 col-md-2 col-lg-1 c-app-col">

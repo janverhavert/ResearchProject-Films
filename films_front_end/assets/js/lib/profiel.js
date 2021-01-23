@@ -4,7 +4,7 @@ const profiel = async () => {
   let urlReviews = `user/reviews/${localStorage.getItem('UserId')}`;
   const data = await dataAccess.api.get(urlReviews);
   let reviewsString = '';
-  if (data == '[]') {
+  if (data == null) {
     document.querySelector('#c-reviews').innerHTML = '<div class="c-app-empty">Nog geen reviews toegevoegd</div>';
   } else {
     for (const review of data) {

@@ -14,7 +14,21 @@
                 <th scope="col"></th>
               </tr>
             </thead>
-            <tbody id="c-tableReviews"></tbody>
+            <tbody id="c-tableReviews">
+              <%= for (review) in reviews { %>
+              <tr>
+                <th scope="row"><%= review.FilmId %></th>
+                <td><%= review.UserName %></td>
+                <td><%= review.Titel %></td>
+                <td><%= review.DateOfCreation %></td>
+                <td>
+                  <div>
+                    <button class="btn btn-primary c-table-button c-app-buttons-selected js-delete" type="button" id="$<%= review.FilmId %>">Delete</button>
+                  </div>
+                </td>
+              </tr>
+              <% } %>
+            </tbody>
           </table>
         </div>
       </div>

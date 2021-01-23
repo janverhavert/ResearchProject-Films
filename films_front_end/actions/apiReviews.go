@@ -26,6 +26,7 @@ func getFilmReviewsHandler(c buffalo.Context) error {
 
 	//Get id from parameters
 	id, _ := params["id"]
+	fmt.Println(id)
 	// we created Book array
 	var films []models.Reviews
 	// bson.M{},  we passed empty filter. So we want to get all data.
@@ -59,11 +60,7 @@ func getFilmReviewsHandler(c buffalo.Context) error {
 		log.Fatal(err)
 	}
 	fmt.Println(films)
-	if len(films) == 0 {
-		return c.Render(http.StatusOK, r.JSON("[]"))
-	} else {
-		return c.Render(http.StatusOK, r.JSON(films))
-	}
+	return c.Render(http.StatusOK, r.JSON(films))
 
 	//json.NewEncoder(http.ResponseWriter).Encode()
 
@@ -108,11 +105,7 @@ func getUserReviewsHandler(c buffalo.Context) error {
 		log.Fatal(err)
 	}
 	fmt.Println(films)
-	if len(films) == 0 {
-		return c.Render(http.StatusOK, r.JSON("[]"))
-	} else {
-		return c.Render(http.StatusOK, r.JSON(films))
-	}
+	return c.Render(http.StatusOK, r.JSON(films))
 	//json.NewEncoder(http.ResponseWriter).Encode()
 
 }

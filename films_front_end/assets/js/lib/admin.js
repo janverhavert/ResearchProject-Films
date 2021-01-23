@@ -1,8 +1,8 @@
 import dataAccess from '../lib/dataAccess';
-import AdminTable from '../components/admintable';
-import AdminReviewsTable from '../components/adminReviewstable';
+//import AdminTable from '../components/admintable';
+//import AdminReviewsTable from '../components/adminReviewstable';
 const admin = async () => {
-  await getAdminData();
+  //await getAdminData();
   adminDelete();
 };
 
@@ -26,7 +26,7 @@ const adminDelete = () => {
 const getAdminData = async () => {
   const data = await dataAccess.api.get('All');
   let filmString = '';
-  if (data == '[]') {
+  if (data == null) {
     document.querySelector('#c-table').innerHTML = 'geen film gevonden';
   } else {
     for (const film of data) {

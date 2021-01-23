@@ -16,10 +16,9 @@ const dataFilmDetail = async () => {
     const dataReviews = await dataAccess.api.get(apiReviews);
     if (localStorage.getItem('UserId')) {
       const dataWatched = await dataAccess.api.get(apiWatched);
-      console.log(typeof dataWatched);
       document.querySelector('#c-review-form').innerHTML = reviewForm();
       data['watched'] = false;
-      if (!dataWatched == null) {
+      if (dataWatched != null) {
         for (const watchedlist of dataWatched) {
           if (watchedlist.filmId == id) {
             data['watched'] = true;
@@ -59,7 +58,7 @@ const getReviews = async () => {
   const dataReviews = await dataAccess.api.get(apiReviews);
 
   let reviewString = '';
-  if (dataReviews == '[]') {
+  if (dataReviews == null) {
     document.querySelector('.js-eerste').innerHTML = 'Wees de eerste';
   } else {
     for (const review of dataReviews) {

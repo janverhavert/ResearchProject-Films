@@ -21,6 +21,8 @@ const header = () => {
       localStorage.removeItem('UserId');
       localStorage.removeItem('UserRole');
       localStorage.removeItem('UserName');
+      document.cookie = 'UserRole' + '=; Max-Age=0';
+      document.cookie = 'UserId' + '=; Max-Age=0';
       window.location.href = '/';
     };
   } else {
