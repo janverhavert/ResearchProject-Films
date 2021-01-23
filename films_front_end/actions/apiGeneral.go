@@ -103,7 +103,7 @@ func createFilmHandler(c buffalo.Context) error {
 		fmt.Println(err)
 	}
 	film.PosterUrl = movie.Results[0].PosterPath
-	fmt.Println(film)
+	//fmt.Println(film)
 	// insert our book model.
 	result, err := collection.InsertOne(context.TODO(), film)
 

@@ -27,15 +27,15 @@ const dataFilmDetail = async () => {
         }
       }
     }
-
-    var sum = 0;
-    for (var i = 0; i < dataReviews.length; i++) {
-      (sum += dataReviews[i].score), 10; //don't forget to add the base
+    if (dataReviews != null) {
+      var sum = 0;
+      for (var i = 0; i < dataReviews.length; i++) {
+        (sum += dataReviews[i].score), 10; //don't forget to add the base
+      }
+      var avg = sum / dataReviews.length;
+      data['avg'] = Math.round(avg * 10) / 10;
+      data['reviews'] = dataReviews;
     }
-    var avg = sum / dataReviews.length;
-    data['avg'] = Math.round(avg * 10) / 10;
-    data['reviews'] = dataReviews;
-
     filmDetail(data);
     getReviews();
     if (localStorage.getItem('UserId')) {

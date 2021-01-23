@@ -63,7 +63,7 @@ func WatchedHandler(c buffalo.Context) error {
 
 		c.Set("type", "Watched")
 		c.Set("films", films)
-		fmt.Println(films)
+		//fmt.Println(films)
 		if len(films) <= 0 {
 			c.Set("empty", "films")
 		}

@@ -98,7 +98,7 @@ func getSeriebyNameHandler(c buffalo.Context) error {
 	if err := cur.Err(); err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(films)
+	//fmt.Println(films)
 	return c.Render(http.StatusOK, r.JSON(films))
 	//json.NewEncoder(http.ResponseWriter).Encode()
 
