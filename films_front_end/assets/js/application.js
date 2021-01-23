@@ -24,16 +24,16 @@ document.addEventListener('DOMContentLoaded', async function () {
 
   if (window.location.href == url + '/') {
     document.querySelector('#c-filmheader').className = 'nav-link active';
-    dataFilmCard('Films');
+    // dataFilmCard('Films');
     bar('Films');
   } else if (window.location.href == url + '/series') {
     document.querySelector('#c-serie').className = 'nav-link active';
-    dataFilmCard('Series');
+    // dataFilmCard('Series');
     bar('Series');
   } else if (window.location.href == url + '/watched') {
     if (localStorage.getItem('UserRole') == 'Admin' || localStorage.getItem('UserRole') == 'Customer') {
       document.querySelector('#c-watch').className = 'nav-link active';
-      dataWatched('Watched');
+      //dataWatched('Watched');
     } else {
       window.location.href = '/';
     }

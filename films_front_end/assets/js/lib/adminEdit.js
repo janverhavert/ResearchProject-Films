@@ -4,7 +4,6 @@ import filmCRUD from '../components/adminFilmCRUD';
 import dataAccess from '../lib/dataAccess';
 const adminAdd = async () => {
   const datagenres = await dataAccess.api.get('Genres');
-  console.log(datagenres);
   let genreString = '';
   for (const genre of datagenres) {
     const b = new Genre(genre);
@@ -18,7 +17,6 @@ const adminAdd = async () => {
   var url = window.location.pathname;
   var id = url.substring(url.lastIndexOf('/') + 1);
   const data = await dataAccess.api.get(`Film/${id}`);
-  console.log(data);
   FilmForm(data);
 
   filmCRUD('PUT');

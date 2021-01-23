@@ -17,5 +17,18 @@
       </div>
     </div>
   </div>
-  <div class="row c-app-row c-film" id="c-films"></div>
+  <div class="row c-app-row c-film" id="c-films">
+    <%= for (film) in films { %>
+    <div class="col-xs-6 col-sm-4 col-md-2 col-lg-1 c-app-col">
+      <a href="/film/<%= film.FilmId %>">
+        <div class="card c-card-div text-center pl-0">
+          <div class="card-body c-card-body">
+            <img src="http://image.tmdb.org/t/p/w500<%= film.PosterUrl %>" class="d-block w-100 c-card-img" alt="Poster film" />
+            <h7 class="card-title c-card-title"> <%= film.Titel %> </h7>
+          </div>
+        </div>
+      </a>
+    </div>
+    <% } %>
+  </div>
 </main>

@@ -13,26 +13,24 @@ const dataFilmDetail = async () => {
   if (data.message == 'error!') {
     window.location.href = '/';
   } else {
-    console.log(data);
     const dataReviews = await dataAccess.api.get(apiReviews);
-    console.log(dataReviews);
     if (localStorage.getItem('UserId')) {
       const dataWatched = await dataAccess.api.get(apiWatched);
-      console.log(dataWatched);
+      console.log(typeof dataWatched);
       document.querySelector('#c-review-form').innerHTML = reviewForm();
       data['watched'] = false;
-
-      for (const watchedlist of dataWatched) {
-        if (watchedlist.filmId == id) {
-          data['watched'] = true;
-          break;
+      if (!dataWatched == null) {
+        for (const watchedlist of dataWatched) {
+          if (watchedlist.filmId == id) {
+            data['watched'] = true;
+            break;
+          }
         }
       }
     }
 
     var sum = 0;
     for (var i = 0; i < dataReviews.length; i++) {
-      console.log(dataReviews[i].score);
       (sum += dataReviews[i].score), 10; //don't forget to add the base
     }
     var avg = sum / dataReviews.length;
@@ -41,16 +39,14 @@ const dataFilmDetail = async () => {
 
     filmDetail(data);
     getReviews();
-    const button = document.querySelector('.js-watched');
-    console.log(button.id);
-    button.onclick = function () {
-      console.log('click');
-      Watched.call(this, data.filmId, button);
-    };
+    if (localStorage.getItem('UserId')) {
+      const button = document.querySelector('.js-watched');
+      button.onclick = function () {
+        Watched.call(this, data.filmId, button);
+      };
+    }
     const buttonReview = document.querySelector('.js-review');
-    console.log(buttonReview);
     buttonReview.onclick = function () {
-      console.log('click');
       Review.call(this, data.filmId, localStorage.getItem('UserId'));
     };
   }
@@ -76,7 +72,6 @@ const getReviews = async () => {
 
 const Review = (filmId, UserId) => {
   const titel = document.querySelector('#titel').value;
-  console.log(titel);
   const score = document.querySelector('#score').value;
   const discription = document.querySelector('#discription').value;
   const userName = localStorage.getItem('UserName');

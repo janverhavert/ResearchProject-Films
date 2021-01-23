@@ -70,8 +70,6 @@ func getFilmbyIdHandler(c buffalo.Context) error {
 	//Get id from parameters
 	id, _ := params["id"]
 	// we created Book array
-
-	fmt.Println(id)
 	// bson.M{},  we passed empty filter. So we want to get all data.
 	filter := bson.M{"filmId": id}
 	err := collection.FindOne(context.TODO(), filter).Decode(&film)

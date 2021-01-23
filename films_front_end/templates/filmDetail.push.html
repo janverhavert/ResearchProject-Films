@@ -2,12 +2,12 @@
     <div class="row c-app-row" id="c-film">
      <div class="col-sm-12 col-md-5 col-lg-3 c-filmdetail-imgdiv">
         <div class="c-filmdetail-imgdiv-watched"><button class="btn js-watched" id="notWatched" ></button></div>
-        <img src="https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/1280x1280/products/89058/93685/Joker-2019-Final-Style-steps-Poster-buy-original-movie-posters-at-starstills__62518.1572351179.jpg?c=2?imbypass=on" class="d-block w-100" alt="poster" id="c-poster" />
+        <img src="http://image.tmdb.org/t/p/w500<%= film.PosterUrl %>" class="d-block w-100" alt="poster" id="c-poster" />
      </div>
      <div class="col-sm-12 col-md-7 col-lg-9 c-detail-info-div text-light">
         <div class="c-filmsdetail-card-body">
             <div class="c-filmsdetail-card">
-            <h2 class="c-filmdetail-title" id="c-title"></h2>
+            <h2 class="c-filmdetail-title" id="c-title"><%= film.Titel %></h2>
               <p class="card-text">
                 <div class="c-filmsdetail-card-info">
                     <span class="c-filmdetail-info-top" id="c-date"></span> <span class="c-filmdetail-info-top" id="c-duur"></span> <span class="c-filmdetail-info-top" id="c-genre"></span>
@@ -19,14 +19,12 @@
               </p>
               
               <p class="card-text" id="c-discription">
-                
+                <%= film.Discription %>
               </p>
               <p class="card-text c-filmsdetail-card-info" >
-                <span class="c-filmdetail-info-top" id="c-director"></span>
+                <span class="c-filmdetail-info-top" id="c-director">Regisseur: <%= film.Director %> </span>
                 <span class=""></span>
-              </p>
-
-              
+              </p>     
             </div>
           </div>
         </div>

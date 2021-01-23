@@ -41,7 +41,6 @@ const errorDisplay = (error) => {
 
 const getLoginID = (json, username) => {
   var jsonresult = JSON.parse(json);
-  console.log(username);
 
   fetch(`http://localhost:63436/api/auth/LoginData/?name=${username}&token=${jsonresult.token}`)
     .then((response) => response.text())
@@ -50,7 +49,6 @@ const getLoginID = (json, username) => {
 };
 
 const getUserData = (userId) => {
-  console.log(userId);
   AddUserToRole(userId);
   window.location.href = '/login';
 };

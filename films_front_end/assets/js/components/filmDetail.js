@@ -1,8 +1,8 @@
 import starSystem from '../lib/starSystem';
 
 const filmDetail = (data) => {
-  document.querySelector('#c-poster').src = 'http://image.tmdb.org/t/p/w500' + data.posterUrl;
-  document.querySelector('#c-title').innerHTML = data.titel;
+  //document.querySelector('#c-poster').src = 'http://image.tmdb.org/t/p/w500' + data.posterUrl;
+  //document.querySelector('#c-title').innerHTML = data.titel;
   if (data.watched == true) {
     document.querySelector('.js-watched').innerHTML = 'Watched';
     document.querySelector('.js-watched').id = 'Watched';
@@ -12,7 +12,12 @@ const filmDetail = (data) => {
   }
 
   document.querySelector('#c-date').innerHTML = data.releaseDatum.toString().split('T')[0];
-  document.querySelector('#c-duur').innerHTML = data.duur + ' min';
+  if (data.type == 'movie') {
+    document.querySelector('#c-duur').innerHTML = data.duur + ' min';
+  } else {
+    document.querySelector('#c-duur').innerHTML = data.duur + ' seasons';
+  }
+
   document.querySelector('#c-genre').innerHTML = data.genres[0].genreName;
   document.querySelector('#c-stars').innerHTML = starSystem(data.avg);
   if (data.avg) {
@@ -21,8 +26,8 @@ const filmDetail = (data) => {
     document.querySelector('#c-score').innerHTML = 'Nog geen reviews';
   }
 
-  document.querySelector('#c-discription').innerHTML = data.discription;
-  document.querySelector('#c-director').innerHTML = 'Regisseur: ' + data.director;
+  //document.querySelector('#c-discription').innerHTML = data.discription;
+  //document.querySelector('#c-director').innerHTML = 'Regisseur: ' + data.director;
 };
 // function Film({ filmId, titel, director, discription, duur, genres, releaseDatum, avg, reviews }) {
 //   Object.assign(this, { filmId, titel, director, discription, duur, genres, releaseDatum, avg, reviews });

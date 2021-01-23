@@ -9,9 +9,7 @@ const admin = async () => {
 const adminDelete = () => {
   const buttons = document.querySelectorAll('.js-delete');
   for (let i = 0; i < buttons.length; i++) {
-    console.log(buttons[i].id);
     buttons[i].onclick = function () {
-      console.log(buttons[i].id);
       var myHeaders = new Headers();
       //myHeaders.append('Content-Type', 'application/json');
       myHeaders.append('X-CSRF-Token', document.getElementsByName('csrf-token')[0].content);

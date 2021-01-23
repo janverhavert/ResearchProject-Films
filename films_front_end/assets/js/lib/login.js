@@ -33,7 +33,6 @@ const errorDisplay = (error) => {
 
 const getLoginID = (json, username) => {
   var jsonresult = JSON.parse(json);
-  console.log(username);
 
   fetch(`http://localhost:63436/api/auth/LoginData/?name=${username}&token=${jsonresult.token}`)
     .then((response) => response.text())
@@ -42,9 +41,7 @@ const getLoginID = (json, username) => {
 };
 
 const getUserData = (userId) => {
-  console.log(userId);
   var url = `http://localhost:63436/api/auth/UserData/?UserId=${userId}`;
-  console.log(url);
   fetch(url)
     .then((response) => response.text())
     .then((result) => inloggen(result))
@@ -53,10 +50,10 @@ const getUserData = (userId) => {
 
 const inloggen = (userData) => {
   var user = JSON.parse(userData);
-  console.log(user);
   var userId = user.user.id;
   var userName = user.user.userName;
   var userRole = user.assignedRoles[0];
+  document.cookie = `UserId=${userId}; expires=Sun, 1 Jan 2023 00:00:00 UTC; path=/`;
   localStorage.setItem('UserId', userId);
   localStorage.setItem('UserRole', userRole);
   localStorage.setItem('UserName', userName);

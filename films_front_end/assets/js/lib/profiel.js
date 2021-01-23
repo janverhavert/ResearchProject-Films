@@ -11,7 +11,6 @@ const profiel = async () => {
       let filmId = review.filmId;
       let api = `Film/${filmId}`;
       const data = await dataAccess.api.get(api);
-      console.log(data);
       review['filmTitel'] = data.titel;
       review['posterUrl'] = data.posterUrl;
       const b = new UserReviews(review);
