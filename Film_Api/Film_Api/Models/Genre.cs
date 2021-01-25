@@ -18,7 +18,7 @@ namespace Film_Api.Models
         public Guid GenreId { get; set; } = Guid.NewGuid();
 
         [BsonElement]
-        public string GenreNaam { get; set; }
+        public string GenreName { get; set; }
 
     }
 }

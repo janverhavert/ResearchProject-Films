@@ -76,7 +76,7 @@ namespace Film_Api
                 endpoints.MapControllers();
             });
 
-            //seeder.initDatabase(20);
+            //seeder.initDatabase(1);
         }
     }
 }

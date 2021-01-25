@@ -26,7 +26,7 @@ namespace Film_Api.Data
                         Database.GetCollection<Review>("reviews");
 
         public IMongoCollection<Genre> Genres =>
-                        Database.GetCollection<Genre>("Genres");
+                        Database.GetCollection<Genre>("genres");
 
         public IMongoCollection<Watched> Watched =>
                        Database.GetCollection<Watched>("watched");

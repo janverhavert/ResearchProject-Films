@@ -31,7 +31,7 @@ namespace Film_Api.Repositories
                 //2. docs bevragen (Mongo query) en returnen
                 //noot: alle mongo methodes bestaan synchroon en asynchroon
                 IEnumerable<Genre> result = await
-                 collection.Find(FilterDefinition<Genre>.Empty).SortBy(r => r.GenreNaam).ToListAsync<Genre>();
+                 collection.Find(FilterDefinition<Genre>.Empty).SortBy(r => r.GenreName).ToListAsync<Genre>();
                 //var result = await context.Restaurants.Find(_ => true).ToListAsync<Restaurant>();
 
                 //3. Return query resultaat
