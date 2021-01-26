@@ -75,6 +75,7 @@ const Review = (filmId, UserId) => {
   const discription = document.querySelector('#discription').value;
   const userName = localStorage.getItem('UserName');
 
+  if(score  >= 0 && score <= 10){
   var myHeaders = new Headers();
   myHeaders.append('Content-Type', 'application/json');
   myHeaders.append(
@@ -93,6 +94,7 @@ const Review = (filmId, UserId) => {
     .then((response) => response.text())
     .then((result) => getReviews())
     .catch((error) => console.log(error));
+}
 };
 
 const Watched = (id, button) => {

@@ -5,7 +5,7 @@ const reviewForm = () => {
 </div>
 <div class="mb-3 col-lg-2">
     <label for="score" class="form-label">Score</label>
-    <input type="number" class="form-control bg-dark text-light" id="score" placeholder="">
+    <input type="number" class="form-control bg-dark text-light" id="score" placeholder="" min="1" max="10">
 </div>
 <div class="mb-3 col-lg-10">
     <label for="discription" class="form-label">Discription</label>
