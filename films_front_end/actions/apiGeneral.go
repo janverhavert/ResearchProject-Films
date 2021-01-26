@@ -22,7 +22,7 @@ func getAllHandler(c buffalo.Context) error {
 	collection := helper.ConnectDB().Collection("films")
 	//http.ResponseWriter.Header().Set("Content-Type", "application/json")
 
-	// we created Book array
+	// we created Film array
 	var films []models.Film
 
 	// bson.M{},  we passed empty filter. So we want to get all data.
